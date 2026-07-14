@@ -39,26 +39,20 @@ jobs:
           cat > ~/.ssh/config <<EOF
           Host deploy
               HostName ssh.franucles.com
+              IdentityFile ~/.ssh/portfolio-deploy
               User portfolio-deploy
               StrictHostKeyChecking no
               ProxyCommand cloudflared access ssh --hostname %h
           EOF
 
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_ed25519
-          chmod 600 ~/.ssh/id_ed25519
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/portfolio-deploy
+          chmod 600 ~/.ssh/portfolio-deploy
 
           echo "${{ secrets.SSH_KNOWN_HOSTS }}" > ~/.ssh/known_hosts
-      - name: Debug SSH
-        env:
-          TUNNEL_SERVICE_TOKEN_ID: ${{ secrets.TUNNEL_SERVICE_TOKEN_ID }}
-          TUNNEL_SERVICE_TOKEN_SECRET: ${{ secrets.TUNNEL_SERVICE_TOKEN_SECRET }}
-        run: |
-          cat ~/.ssh/config
-          ls -l ~/.ssh
-          ssh -v deploy "echo OK"
+          
       - name: Deploy
         env:
           TUNNEL_SERVICE_TOKEN_ID: ${{ secrets.TUNNEL_SERVICE_TOKEN_ID }}
           TUNNEL_SERVICE_TOKEN_SECRET: ${{ secrets.TUNNEL_SERVICE_TOKEN_SECRET }}
         run: |
-          rsync -az --delete dist/ deploy:~
+          rsync -az --delete dist/ deploy:~/web
