@@ -1,0 +1,30 @@
+---
+import GithubIcon from './GithubIcon.astro';
+
+export interface Props {
+  project: any;
+  lang: 'es' | 'en';
+}
+
+const { project, lang } = Astro.props;
+const p = project[lang];
+const base = lang === 'en' ? '/en' : '';
+const href = `${base}/proyectos/${project.slug}/`;
+---
+
+<article class="card">
+  <a class="card-cover" href={href}>
+    <div class={`card-thumb thumb-${project.thumb}`}>
+      <span class="thumb-label">{p.title}</span>
+    </div>
+    <div class="card-body">
+      <h3>{p.title}</h3>
+      <p>{p.summary}</p>
+    </div>
+  </a>
+  <div class="card-links">
+    <a href="#" aria-label="Site">🌐</a>
+    <a href="#" aria-label="Repository"><GithubIcon /></a>
+    {project.docsLink && <a href="#" aria-label="Docs">▤</a>}
+  </div>
+</article>

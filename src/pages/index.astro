@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import Contact from '../components/Contact.astro';
+import { ui } from '../i18n/ui';
+import { projects } from '../data/projects';
+
+const lang = 'es';
+const t = ui[lang].work;
+---
+
+<BaseLayout title="Francisco Ucles Ayllón — Desarrollo front-end / Proyectos" lang={lang}>
+  <Hero lang={lang} />
+
+  <section class="work" id="work">
+    <div class="section-head">
+      <h2>{t.heading}</h2>
+      <p>{t.sub}</p>
+    </div>
+    <div class="project-grid">
+      {projects.map((project) => <ProjectCard project={project} lang={lang} />)}
+    </div>
+  </section>
+
+  <Contact lang={lang} />
+</BaseLayout>

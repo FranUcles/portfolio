@@ -1,0 +1,48 @@
+---
+import { ui } from '../../i18n/ui';
+
+export interface Props {
+  project: any;
+  lang: 'es' | 'en';
+}
+
+const { project, lang } = Astro.props;
+const p = project[lang];
+const t = ui[lang].project;
+---
+
+<h2>{t.theProcess}</h2>
+<div class="timeline">
+  {
+    p.phases.map(([title, text], i) => (
+      <div class="timeline-item">
+        <div class="timeline-marker">{i + 1}</div>
+        <div class="timeline-content">
+          <h3>{title}</h3>
+          <p>{text}</p>
+        </div>
+      </div>
+    ))
+  }
+</div>
+
+<div class="result-banner">
+  <h2>{t.result}</h2>
+  <div class="stat-row">
+    {
+      p.stats.map(([value, label]) => (
+        <div class="stat">
+          <strong>{value}</strong>
+          <span>{label}</span>
+        </div>
+      ))
+    }
+  </div>
+</div>
+
+<div class="tech-section">
+  <h2>{t.tech}</h2>
+  <div class="tag-row">
+    {project.tags.map((tag) => <span>{tag}</span>)}
+  </div>
+</div>

@@ -1,0 +1,19 @@
+---
+import { ui } from '../i18n/ui';
+
+export interface Props {
+  lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = ui[lang].contact;
+---
+
+<section class="contact" id="contact">
+  <h2>{t.heading}</h2>
+  <a href="mailto:francisco.ucles.ayllon@gmail.com" class="contact-link">francisco.ucles.ayllon@gmail.com</a>
+  <div class="social">
+    <a href="https://github.com/FranUcles/">GitHub</a>
+    <a href="https://linkedin.com/in/franciscoua">LinkedIn</a>
+  </div>
+</section>

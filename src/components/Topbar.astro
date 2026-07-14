@@ -1,0 +1,26 @@
+---
+import { ui } from '../i18n/ui';
+
+export interface Props {
+  lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = ui[lang].nav;
+
+const path = Astro.url.pathname;
+// URL equivalente en el otro idioma: quita o añade el prefijo /en
+const altPath = lang === 'en' ? path.replace(/^\/en/, '') || '/' : '/en' + path;
+
+const homeHref = lang === 'en' ? '/en/' : '/';
+---
+
+<header class="topbar">
+  <a href={homeHref} class="mark">franucles<span class="mark-dot">.</span>com</a>
+  <nav class="topnav">
+    <a href={`${homeHref}#work`}>{t.work}</a>
+    <a href={`${homeHref}#contact`}>{t.contact}</a>
+    <a href="/cv/Francisco_Ucles_Ayllón_CV.pdf" target="_blank" rel="noopener">CV</a>
+    <a href={altPath} class="lang-switch" aria-label="Cambiar idioma / Switch language">{t.langSwitch}</a>
+  </nav>
+</header>

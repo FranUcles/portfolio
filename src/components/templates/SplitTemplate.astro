@@ -1,0 +1,46 @@
+---
+import { ui } from '../../i18n/ui';
+
+export interface Props {
+  project: any;
+  lang: 'es' | 'en';
+  reverseFirst?: boolean;
+}
+
+const { project, lang, reverseFirst = false } = Astro.props;
+const p = project[lang];
+const t = ui[lang].project;
+const c = project.colors;
+
+const row1Reverse = reverseFirst;
+const row2Reverse = !reverseFirst;
+---
+
+<div class:list={['split-row', { reverse: row1Reverse }]}>
+  <div class="split-visual" style={`background:linear-gradient(135deg,${c.c1a},${c.c1b});`}>
+    {p.visual1Label}
+  </div>
+  <div class="split-text">
+    <p class="eyebrow-small">{t.summary}</p>
+    <h2>{t.about}</h2>
+    <p>{p.overview1}</p>
+  </div>
+</div>
+
+<div class:list={['split-row', { reverse: row2Reverse }]}>
+  <div class="split-visual" style={`background:linear-gradient(135deg,${c.c2a},${c.c2b});`}>
+    {p.visual2Label}
+  </div>
+  <div class="split-text">
+    <p class="eyebrow-small">{t.processLabel}</p>
+    <h2>{t.process}</h2>
+    <p>{p.overview2}</p>
+  </div>
+</div>
+
+<div class="tech-section">
+  <h2>{t.tech}</h2>
+  <div class="tag-row">
+    {project.tags.map((tag) => <span>{tag}</span>)}
+  </div>
+</div>

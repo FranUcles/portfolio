@@ -1,0 +1,53 @@
+---
+import { ui } from '../i18n/ui';
+
+export interface Props {
+  lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = ui[lang].hero;
+---
+
+<section class="hero">
+  <div class="hero-text">
+    <h1 class="hero-title">{t.title}</h1>
+    <p class="hero-sub">
+      {t.subIntro} <span class="hl hl-warm">{t.name}</span>{t.subMid}
+      <span class="hl hl-cool"> {t.location}</span>{t.subEnd}
+    </p>
+    <div class="hero-cta">
+      <a href="/cv/Francisco_Ucles_Ayllón_CV.pdf" target="_blank" rel="noopener" class="link-btn primary">
+        📄 {t.cvButton}
+      </a>
+    </div>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <svg viewBox="0 0 320 260" class="illo">
+      <ellipse cx="170" cy="235" rx="120" ry="14" fill="#000" opacity="0.18"></ellipse>
+      <g transform="translate(40,40)">
+        <path d="M20 150 L130 90 L240 150 L130 210 Z" fill="#2A2050"></path>
+        <path d="M20 150 L130 210 L130 240 L20 180 Z" fill="#1D1740"></path>
+        <path d="M240 150 L130 210 L130 240 L240 180 Z" fill="#241B4A"></path>
+        <rect x="60" y="30" width="140" height="95" rx="6" fill="#100B24" transform="skewY(-14)"></rect>
+        <rect x="66" y="26" width="128" height="82" rx="4" fill="#0B0720" transform="skewY(-14)"></rect>
+        <g transform="skewY(-14)">
+          <rect x="76" y="36" width="60" height="6" rx="3" fill="#F2B679"></rect>
+          <rect x="76" y="48" width="90" height="6" rx="3" fill="#8FD9E8"></rect>
+          <rect x="76" y="60" width="40" height="6" rx="3" fill="#C9BFF0"></rect>
+          <rect x="76" y="72" width="75" height="6" rx="3" fill="#F2B679"></rect>
+          <rect x="76" y="84" width="55" height="6" rx="3" fill="#8FD9E8"></rect>
+        </g>
+      </g>
+      <g transform="translate(255,155)">
+        <ellipse cx="14" cy="34" rx="16" ry="6" fill="#000" opacity="0.15"></ellipse>
+        <rect x="0" y="0" width="28" height="30" rx="3" fill="#1D1740"></rect>
+        <rect x="0" y="0" width="28" height="8" rx="3" fill="#241B4A"></rect>
+        <rect x="8" y="-10" width="4" height="12" fill="#1D1740"></rect>
+      </g>
+    </svg>
+  </div>
+  <svg class="wave-divider" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0,120 C360,0 1080,0 1440,120 L1440,120 L0,120 Z" fill="var(--bg-light)"></path>
+  </svg>
+</section>

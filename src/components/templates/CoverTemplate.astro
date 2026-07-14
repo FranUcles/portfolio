@@ -1,0 +1,37 @@
+---
+import { ui } from '../../i18n/ui';
+
+export interface Props {
+  project: any;
+  lang: 'es' | 'en';
+}
+
+const { project, lang } = Astro.props;
+const p = project[lang];
+const t = ui[lang].project;
+const c = project.colors;
+---
+
+<div class="cover-banner" style={`background:linear-gradient(135deg,${c.c1a},${c.c1b});`}>
+  {p.title} — {t.screenshots}
+</div>
+<div class="cover-content">
+  <h2>{t.about}</h2>
+  <p>{p.overview1}</p>
+  <p>{p.overview2}</p>
+  <blockquote class="pull-quote">{p.quote}</blockquote>
+  <div class="stat-row">
+    {
+      p.stats.map(([value, label]) => (
+        <div class="stat">
+          <strong>{value}</strong>
+          <span>{label}</span>
+        </div>
+      ))
+    }
+  </div>
+  <h2>{t.tech}</h2>
+  <div class="tag-row">
+    {project.tags.map((tag) => <span>{tag}</span>)}
+  </div>
+</div>

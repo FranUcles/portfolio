@@ -1,0 +1,14 @@
+---
+import { ui } from '../i18n/ui';
+
+export interface Props {
+  lang: 'es' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = ui[lang].footer;
+---
+
+<footer class="footer">
+  <span>{t.rights}</span>
+</footer>

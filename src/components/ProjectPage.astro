@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GithubIcon from './GithubIcon.astro';
+import SplitTemplate from './templates/SplitTemplate.astro';
+import CoverTemplate from './templates/CoverTemplate.astro';
+import TimelineTemplate from './templates/TimelineTemplate.astro';
+import CarouselTemplate from './templates/CarouselTemplate.astro';
+import { ui } from '../i18n/ui';
+
+export interface Props {
+  project: any;
+  lang: 'es' | 'en';
+}
+
+const { project, lang } = Astro.props;
+const p = project[lang];
+const t = ui[lang].project;
+const base = lang === 'en' ? '/en' : '';
+---
+
+<BaseLayout title={`${p.title} — Alex Marín`} lang={lang}>
+  <section class="project-hero">
+    <a href={`${base}/#work`} class="breadcrumb">{t.back}</a>
+    <div class="project-hero-head">
+      <p class="project-eyebrow">{p.eyebrow}</p>
+      <h1>{p.title}</h1>
+      <p class="project-tagline">{p.tagline}</p>
+      <div class="project-meta">
+        <div class="project-meta-item">
+          <span class="label">{t.yearLabel}</span>
+          <span class="value">{project.year}</span>
+        </div>
+        <div class="project-meta-item">
+          <span class="label">{t.roleLabel}</span>
+          <span class="value">{p.role}</span>
+        </div>
+        <div class="project-meta-item">
+          <span class="label">{t.stackLabel}</span>
+          <span class="value">{p.stackShort}</span>
+        </div>
+      </div>
+      <div class="project-links">
+        <a href="#" class="link-btn"><GithubIcon /> {t.repo}</a>
+        {project.docsLink && <a href="#" class="link-btn">▤ {t.docs}</a>}
+      </div>
+    </div>
+    <svg class="wave-divider" viewBox="0 0 1440 120" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0,120 C360,0 1080,0 1440,120 L1440,120 L0,120 Z" fill="var(--bg-light)"></path>
+    </svg>
+  </section>
+
+  <section class="project-body">
+    {project.template === 'split' && <SplitTemplate project={project} lang={lang} />}
+    {project.template === 'split-reverse' && <SplitTemplate project={project} lang={lang} reverseFirst={true} />}
+    {project.template === 'cover' && <CoverTemplate project={project} lang={lang} />}
+    {project.template === 'timeline' && <TimelineTemplate project={project} lang={lang} />}
+    {project.template === 'carousel' && <CarouselTemplate project={project} lang={lang} />}
+  </section>
+</BaseLayout>
