@@ -1,0 +1,59 @@
+---
+export interface Props {
+  media: {
+    type: 'color' | 'image' | 'video';
+    c1?: string;
+    c2?: string;
+    src?: string;
+    poster?: string;
+    // 'cover' (por defecto) recorta la imagen para rellenar el hueco —
+    // ideal para fotos horizontales que ya tienen una proporción parecida
+    // al contenedor. 'contain' muestra la imagen entera, sin recortar,
+    // con el hueco sobrante relleno de un fondo oscuro — mejor para
+    // capturas verticales de móvil o imágenes cuadradas.
+    fit?: 'cover' | 'contain';
+    // Punto de referencia del recorte cuando fit es 'cover', p. ej.
+    // 'top', 'center top', 'bottom' — útil si el recorte por defecto
+    // (centrado) corta algo importante de la imagen.
+    position?: string;
+  };
+  label?: string;
+}
+
+const { media, label } = Astro.props;
+const fit = media.fit || 'cover';
+const position = media.position || 'center';
+const letterboxBg = fit === 'contain' ? 'var(--bg-dark)' : 'transparent';
+---
+
+{media.type === 'color' && (
+  <div class="media-fill media-color" style={`background:linear-gradient(135deg,${media.c1},${media.c2});`}>
+    {label && <span>{label}</span>}
+  </div>
+)}
+{media.type === 'image' && (
+  <img
+    class="media-fill js-lightbox"
+    style={`object-fit:${fit};object-position:${position};background:${letterboxBg};`}
+    src={media.src}
+    alt={label || ''}
+    loading="lazy"
+    tabindex="0"
+    role="button"
+    aria-label={label ? `Ampliar imagen: ${label}` : 'Ampliar imagen'}
+  />
+)}
+{media.type === 'video' && (
+  <video
+    class="media-fill"
+    style={`object-fit:${fit};object-position:${position};background:${letterboxBg};`}
+    src={media.src}
+    poster={media.poster}
+    autoplay
+    muted
+    loop
+    playsinline
+  >
+    {label}
+  </video>
+)}

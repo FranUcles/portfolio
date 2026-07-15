@@ -30,6 +30,12 @@ const { title, lang } = Astro.props;
       <slot />
     </main>
     <Footer lang={lang} />
+
+    <div id="lightbox" class="lightbox" aria-hidden="true">
+      <button class="lightbox-close" aria-label="Cerrar / Close">✕</button>
+      <img class="lightbox-img" src="" alt="" />
+    </div>
+
     <script src="/scripts/main.js" is:inline></script>
   </body>
 </html>

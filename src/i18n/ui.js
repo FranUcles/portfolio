@@ -1,17 +1,23 @@
 export const ui = {
   es: {
-    nav: { work: 'Proyectos', about: 'Sobre mí', contact: 'Contacto', langSwitch: 'EN' },
+    nav: { work: 'Proyectos', contact: 'Contacto', langSwitch: 'EN' },
+    categories: { work: 'Laboral', academic: 'Académico', personal: 'Personal' },
     hero: {
       title: 'Bienvenido.',
       subIntro: 'Me llamo',
       name: 'Francisco Ucles Ayllón',
       subMid: ', matemático e ingeniero informático residente en',
-      location: 'Murcia, España',
+      location: 'España',
       subEnd:
         '. Este portfolio tiene el objetivo de mostrar los diferentes proyectos académicos, laborales y personales en los que he trabajado. Estos proyectos abarcan desde el diseño de sistemas hasta programación Linux de bajo nivel, sin descuidar el análisis crítico y los detalles de implementación.',
       cvButton: 'Ver currículum',
     },
-    work: { heading: 'Mis proyectos', sub: 'Una selección de trabajos en los que he participado.' },
+    work: { 
+      heading: 'Mis proyectos', 
+      sub: 'Una selección de trabajos en los que he participado.',
+      viewGrouped: 'Por categoría',
+      viewAll: 'Todos', 
+    },
     contact: { heading: 'Información de contacto' },
     footer: { rights: '© 2026 Francisco Ucles Ayllón' },
     project: {
@@ -26,25 +32,31 @@ export const ui = {
       processLabel: 'Proceso',
       process: 'Cómo lo resolví',
       tech: 'Tecnologías',
-      screenshots: 'Capturas',
+      screenshots: 'Capturas del proyecto',
       theProcess: 'El proceso',
       result: 'Resultado',
       summary: 'Resumen',
     },
   },
   en: {
-    nav: { work: 'Projects', about: 'About', contact: 'Contact', langSwitch: 'ES' },
+    nav: { work: 'Projects', contact: 'Contact', langSwitch: 'ES' },
+    categories: { work: 'Work', academic: 'Academic', personal: 'Personal' },
     hero: {
       title: 'Welcome.',
       subIntro: 'My name is',
       name: 'Francisco Ucles Ayllón',
-      subMid: ', a front-end developer based in',
-      location: 'Murcia, Spain',
+      subMid: ', mathematician and computer scienc engineneer living in',
+      location: 'Spain',
       subEnd:
-        '. I have worked on a wide range of front-end projects, from management tools to e-commerce platforms, always focused on clean, carefully crafted interfaces that not only look good but feel great to use.',
+        '. This portfolio aims to showcase the different academic, professional, and personal projects I have worked on. These projects range from systems design to low-level Linux programming, without neglecting critical analysis and implementation details.',
       cvButton: 'View resume',
     },
-    work: { heading: 'My work', sub: 'A selection of projects I have worked on.' },
+    work: { 
+      heading: 'My projects', 
+      sub: 'A selection of projects I have worked on.',
+      viewGrouped: 'By category',
+      viewAll: 'All',
+     },
     contact: { heading: "Contact information" },
     footer: { rights: '© 2026 Francisco Ucles Ayllón' },
     project: {
@@ -59,7 +71,7 @@ export const ui = {
       processLabel: 'Process',
       process: 'How I solved it',
       tech: 'Tech stack',
-      screenshots: 'Screenshots',
+      screenshots: 'Poyect\'s screenshots',
       theProcess: 'The process',
       result: 'Result',
       summary: 'Summary',

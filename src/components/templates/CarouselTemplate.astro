@@ -1,5 +1,6 @@
 ---
 import { ui } from '../../i18n/ui';
+import Visual from '../Visual.astro';
 
 export interface Props {
   project: any;
@@ -13,31 +14,29 @@ const t = ui[lang].project;
 
 <div class="cover-content">
   <h2>{t.about}</h2>
-  <p>{p.overview1}</p>
-  <p>{p.overview2}</p>
+  {p.overviews.map((overview) => (<p>{overview}</p>))}
 </div>
 
 <div class="carousel-wrap">
   <h2>{t.screenshots}</h2>
   <div class="carousel">
     <div class="carousel-track">
-      {
-        p.slides.map(([c1, c2, label]) => (
-          <div class="carousel-slide" style={`background:linear-gradient(135deg,${c1},${c2});`}>
-            {label}
-          </div>
-        ))
-      }
+      {project.media.slides.map((m, i) => (
+        <div class="carousel-slide">
+          <Visual media={m} label={p.slideLabels[i]} />
+          <p>{p.slideLabels[i]}</p>
+        </div>
+      ))}
     </div>
     <button class="carousel-btn prev" aria-label="Prev">←</button>
     <button class="carousel-btn next" aria-label="Next">→</button>
   </div>
   <div class="carousel-dots">
-    {p.slides.map((_, i) => <button class="carousel-dot" aria-label={`Slide ${i + 1}`} />)}
+    {project.media.slides.map((_, i) => <button class="carousel-dot" aria-label={`Slide ${i + 1}`} />)}
   </div>
 </div>
 
-<div class="tech-section" style="max-width:720px;margin-left:auto;margin-right:auto;">
+<div class="tech-section" style="margin-left:auto;margin-right:auto;">
   <h2>{t.tech}</h2>
   <div class="tag-row">
     {project.tags.map((tag) => <span>{tag}</span>)}

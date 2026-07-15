@@ -5,23 +5,44 @@ import ProjectCard from '../components/ProjectCard.astro';
 import Contact from '../components/Contact.astro';
 import { ui } from '../i18n/ui';
 import { projects } from '../data/projects';
-
+ 
 const lang = 'es';
 const t = ui[lang].work;
+const categoryOrder = ['work', 'personal', 'academic'];
+const groups = categoryOrder
+  .map((cat) => ({ cat, label: ui[lang].categories[cat], items: projects.filter((p) => p.category === cat) }))
+  .filter((g) => g.items.length > 0);
 ---
+
 
 <BaseLayout title="Francisco Ucles Ayllón — Desarrollo front-end / Proyectos" lang={lang}>
   <Hero lang={lang} />
 
-  <section class="work" id="work">
+    <section class="work" id="work">
     <div class="section-head">
       <h2>{t.heading}</h2>
       <p>{t.sub}</p>
     </div>
-    <div class="project-grid">
-      {projects.map((project) => <ProjectCard project={project} lang={lang} />)}
+ 
+    <div class="view-toggle" role="group" aria-label="Vista de proyectos">
+      <button type="button" class="view-toggle-btn is-active" data-view="all">{t.viewAll}</button>
+      <button type="button" class="view-toggle-btn" data-view="grouped">{t.viewGrouped}</button>
+    </div>
+ 
+    <div class="project-grid view-all">
+      {groups.map((group) => (
+        <>
+          <div class={`category-divider category-divider--${group.cat}`}>
+            <span class="category-divider-dot"></span>
+            <span class="category-divider-label">{group.label}</span>
+            <span class="category-divider-line"></span>
+          </div>
+          {group.items.map((project) => <ProjectCard project={project} lang={lang} />)}
+        </>
+      ))}
     </div>
   </section>
+
 
   <Contact lang={lang} />
 </BaseLayout>

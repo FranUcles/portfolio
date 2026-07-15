@@ -1,20 +1,29 @@
 ---
 import GithubIcon from './GithubIcon.astro';
+import DocumentIcon from './DocumentIcon.astro';
 
+import { ui } from '../i18n/ui';
+ 
 export interface Props {
   project: any;
   lang: 'es' | 'en';
 }
-
+ 
 const { project, lang } = Astro.props;
 const p = project[lang];
 const base = lang === 'en' ? '/en' : '';
 const href = `${base}/proyectos/${project.slug}/`;
+const links = project.links || {};
+const categoryLabel = ui[lang].categories[project.category];
 ---
-
+ 
 <article class="card">
   <a class="card-cover" href={href}>
     <div class={`card-thumb thumb-${project.thumb}`}>
+      <span class={`card-badge card-badge--${project.category}`}>
+        <span class="card-badge-dot"></span>
+        {categoryLabel}
+      </span>
       <span class="thumb-label">{p.title}</span>
     </div>
     <div class="card-body">
@@ -22,9 +31,11 @@ const href = `${base}/proyectos/${project.slug}/`;
       <p>{p.summary}</p>
     </div>
   </a>
-  <div class="card-links">
-    <a href="#" aria-label="Site">🌐</a>
-    <a href="#" aria-label="Repository"><GithubIcon /></a>
-    {project.docsLink && <a href="#" aria-label="Docs">▤</a>}
-  </div>
+  {(links.site || links.repo || links.docs) && (
+    <div class="card-links">
+      {links.site && <a href={links.site} target="_blank" rel="noopener" aria-label="Site">🌐</a>}
+      {links.repo && <a href={links.repo} target="_blank" rel="noopener" aria-label="Repository"><GithubIcon /></a>}
+      {links.docs && <a href={links.docs} target="_blank" rel="noopener" aria-label="Docs"><DocumentIcon/></a>}
+    </div>
+  )}
 </article>

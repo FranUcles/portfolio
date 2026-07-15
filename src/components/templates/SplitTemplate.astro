@@ -1,5 +1,6 @@
 ---
 import { ui } from '../../i18n/ui';
+import Visual from '../Visual.astro';
 
 export interface Props {
   project: any;
@@ -10,15 +11,14 @@ export interface Props {
 const { project, lang, reverseFirst = false } = Astro.props;
 const p = project[lang];
 const t = ui[lang].project;
-const c = project.colors;
 
 const row1Reverse = reverseFirst;
 const row2Reverse = !reverseFirst;
 ---
 
 <div class:list={['split-row', { reverse: row1Reverse }]}>
-  <div class="split-visual" style={`background:linear-gradient(135deg,${c.c1a},${c.c1b});`}>
-    {p.visual1Label}
+  <div class="split-visual">
+    <Visual media={project.media.row1} label={p.visual1Label} />
   </div>
   <div class="split-text">
     <p class="eyebrow-small">{t.summary}</p>
@@ -28,8 +28,8 @@ const row2Reverse = !reverseFirst;
 </div>
 
 <div class:list={['split-row', { reverse: row2Reverse }]}>
-  <div class="split-visual" style={`background:linear-gradient(135deg,${c.c2a},${c.c2b});`}>
-    {p.visual2Label}
+  <div class="split-visual">
+    <Visual media={project.media.row2} label={p.visual2Label} />
   </div>
   <div class="split-text">
     <p class="eyebrow-small">{t.processLabel}</p>

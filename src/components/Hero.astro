@@ -1,5 +1,6 @@
 ---
 import { ui } from '../i18n/ui';
+import DocumentIcon from './DocumentIcon.astro';
 
 export interface Props {
   lang: 'es' | 'en';
@@ -16,9 +17,9 @@ const t = ui[lang].hero;
       {t.subIntro} <span class="hl hl-warm">{t.name}</span>{t.subMid}
       <span class="hl hl-cool"> {t.location}</span>{t.subEnd}
     </p>
-    <div class="hero-cta">
-      <a href="/cv/Francisco_Ucles_Ayllón_CV.pdf" target="_blank" rel="noopener" class="link-btn primary">
-        📄 {t.cvButton}
+    <div class="hero-cta" style="width: 200px;">
+      <a href="/cv/Francisco_Ucles_Ayllón_CV.pdf" target="_blank" rel="noopener" class="link-btn primary" >
+        <DocumentIcon/> {t.cvButton}
       </a>
     </div>
   </div>

@@ -83,6 +83,52 @@ document.querySelectorAll('.carousel').forEach((carousel) => {
   update();
 });
 
+// ---------- Alternar vista de proyectos: por categoría / todos ----------
+const viewToggle = document.querySelector('.view-toggle');
+const projectGrid = document.querySelector('.project-grid');
+if (viewToggle && projectGrid) {
+  viewToggle.querySelectorAll('.view-toggle-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      viewToggle.querySelectorAll('.view-toggle-btn').forEach((b) => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      projectGrid.classList.toggle('view-all', btn.dataset.view === 'all');
+    });
+  });
+}
+
+// ---------- Lightbox de imágenes ----------
+const lightbox = document.getElementById('lightbox');
+if (lightbox) {
+  const lightboxImg = lightbox.querySelector('.lightbox-img');
+  const closeBtn = lightbox.querySelector('.lightbox-close');
+
+  function openLightbox(src, alt) {
+    lightboxImg.src = src;
+    lightboxImg.alt = alt || '';
+    lightbox.classList.add('open');
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.classList.remove('open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll('img.media-fill').forEach((img) => {
+    img.addEventListener('click', () => openLightbox(img.currentSrc || img.src, img.alt));
+  });
+
+  closeBtn.addEventListener('click', closeLightbox);
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) closeLightbox();
+  });
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+}
+
 // ---------- Topbar dinámica al hacer scroll ----------
 const topbar = document.querySelector('.topbar');
 
