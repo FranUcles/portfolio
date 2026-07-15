@@ -6,15 +6,7 @@ export interface Props {
     c2?: string;
     src?: string;
     poster?: string;
-    // 'cover' (por defecto) recorta la imagen para rellenar el hueco —
-    // ideal para fotos horizontales que ya tienen una proporción parecida
-    // al contenedor. 'contain' muestra la imagen entera, sin recortar,
-    // con el hueco sobrante relleno de un fondo oscuro — mejor para
-    // capturas verticales de móvil o imágenes cuadradas.
     fit?: 'cover' | 'contain';
-    // Punto de referencia del recorte cuando fit es 'cover', p. ej.
-    // 'top', 'center top', 'bottom' — útil si el recorte por defecto
-    // (centrado) corta algo importante de la imagen.
     position?: string;
   };
   label?: string;
@@ -32,28 +24,32 @@ const letterboxBg = fit === 'contain' ? 'var(--bg-dark)' : 'transparent';
   </div>
 )}
 {media.type === 'image' && (
-  <img
-    class="media-fill js-lightbox"
-    style={`object-fit:${fit};object-position:${position};background:${letterboxBg};`}
-    src={media.src}
-    alt={label || ''}
-    loading="lazy"
-    tabindex="0"
-    role="button"
-    aria-label={label ? `Ampliar imagen: ${label}` : 'Ampliar imagen'}
-  />
+  <>
+    <img
+      class="media-fill js-lightbox"
+      style={`object-fit:${fit};object-position:${position};background:${letterboxBg};`}
+      src={media.src}
+      alt={label || ''}
+      loading="lazy"
+      tabindex="0"
+      role="button"
+      aria-label={label ? `Ampliar imagen: ${label}` : 'Ampliar imagen'}
+    />
+    {label && <p class="media-caption">{label}</p>}
+  </>
 )}
 {media.type === 'video' && (
-  <video
-    class="media-fill"
-    style={`object-fit:${fit};object-position:${position};background:${letterboxBg};`}
-    src={media.src}
-    poster={media.poster}
-    autoplay
-    muted
-    loop
-    playsinline
-  >
-    {label}
-  </video>
+  <>
+    <video
+      class="media-fill"
+      style={`object-fit:${fit};object-position:${position};background:${letterboxBg};`}
+      src={media.src}
+      poster={media.poster}
+      autoplay
+      muted
+      loop
+      playsinline
+    ></video>
+    {label && <p class="media-caption">{label}</p>}
+  </>
 )}

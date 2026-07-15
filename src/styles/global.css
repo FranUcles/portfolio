@@ -765,17 +765,7 @@ img.media-fill { cursor: zoom-in; }
   position: relative; /* clave para poder posicionar el <p> */
 }
 
-.carousel-slide p {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  margin: 0;
-  padding: 14px 20px;
-  color: #fff;
-  background: linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0));
-  z-index: 2;
-}
+
 
 .carousel-btn {
   position: absolute;
@@ -877,4 +867,61 @@ img.media-fill { cursor: zoom-in; }
   .result-banner { padding: 32px 24px; }
   .carousel-slide { height: 240px; }
   .carousel-btn { width: 36px; height: 36px; }
+}
+
+/* ---- Enumeración destacada dentro de .cover-content (about) ---- */
+.about-highlight-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin: 8px 0 32px;
+  padding: 0;
+}
+.about-highlight-list li {
+  position: relative;
+  padding-left: 28px;
+  font-size: 17px;
+  line-height: 1.7;
+  color: var(--muted-dark);
+}
+.about-highlight-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--accent-warm);
+}
+.about-highlight-list strong {
+  display: inline;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 17px;
+  color: var(--text-dark);
+  margin-bottom: 2px;
+}
+
+.cover-banner,
+.split-visual,
+.gallery-item,
+.carousel-slide {
+  position: relative;
+}
+
+.media-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  padding: 14px 20px;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.4;
+  background: linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0));
+  z-index: 2;
+  pointer-events: none;
 }

@@ -1,0 +1,58 @@
+---
+import { ui } from '../../i18n/ui';
+import Visual from '../Visual.astro';
+
+export interface Props {
+  project: any;
+  lang: 'es' | 'en';
+}
+
+const { project, lang } = Astro.props;
+const p = project[lang];
+const t = ui[lang].project;
+---
+
+<div class="cover-content">
+  <h2>{t.about}</h2>
+  {p.about.map((block) => (
+    block.type === 'list'
+      ? <ul class="about-highlight-list">
+          {block.items.map((item) => <li><strong>{item.title}:</strong> {item.text}</li>)}
+        </ul>
+      : <p>{block.text}</p>
+  ))}
+  {p.aboutmedia && <div class="cover-banner">
+    <Visual media={p.aboutmedia.cover} label={`${p.aboutmedia.title}`} />
+  </div>}
+</div>
+{p.parts.map((part) => (
+  <>
+    <div class="cover-content">
+      <h2>{part.title}</h2>
+      {part.overviews.map((overview) => (
+        <Fragment>
+          {overview.type === 'p' && <p>{overview.text}</p>}
+          {overview.type === 'list' && (
+            <ul class="about-highlight-list">
+              {overview.items.map((item) => (
+                <li><strong>{item.title}:</strong> {item.text}</li>
+              ))}
+            </ul>
+          )}
+          {overview.type === 'quote' && (
+            <blockquote class="pull-quote">{overview.quote}</blockquote>
+          )}
+        </Fragment>
+      ))}
+    </div>
+    <div class="cover-banner">
+      <Visual media={part.media.cover} label={`${part.media.title} — ${t.screenshots}`} />
+    </div>
+  </>
+))}
+<div class="tech-section" style="margin-left:auto;margin-right:auto;">
+  <h2>{t.tech}</h2>
+  <div class="tag-row">
+    {project.tags.map((tag) => <span>{tag}</span>)}
+  </div>
+</div>

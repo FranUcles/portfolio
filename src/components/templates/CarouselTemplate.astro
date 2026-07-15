@@ -12,10 +12,7 @@ const p = project[lang];
 const t = ui[lang].project;
 ---
 
-<div class="cover-content">
-  <h2>{t.about}</h2>
-  {p.overviews.map((overview) => (<p>{overview}</p>))}
-</div>
+
 
 <div class="carousel-wrap">
   <h2>{t.screenshots}</h2>
@@ -34,6 +31,10 @@ const t = ui[lang].project;
   <div class="carousel-dots">
     {project.media.slides.map((_, i) => <button class="carousel-dot" aria-label={`Slide ${i + 1}`} />)}
   </div>
+</div>
+<div class="cover-content">
+  <h2>{t.about}</h2>
+  {p.overviews.map((overview) => (<p>{overview}</p>))}
 </div>
 
 <div class="tech-section" style="margin-left:auto;margin-right:auto;">

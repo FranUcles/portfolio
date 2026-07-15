@@ -82,14 +82,10 @@ export const projects = [
   },
   {
     slug: 'fcontainers',
-    template: 'split',
+    template: 'parts',
     thumb: 1,
     year: '2026',
     category: 'personal',
-    media: {
-      row1: { type: 'color', c1: '#2a2050', c2: '#443577' },
-      row2: { type: 'color', c1: '#1d1740', c2: '#332a66' },
-    },
     tags: ['C++', 'Sockets', 'Linux', 'Containers', 'Go', 'CLI', 'Daemon'],
     links: {
       repo: 'https://github.com/FranUcles/fcontainers',
@@ -103,28 +99,153 @@ export const projects = [
         'Sistema de contenerización para crear y gestionar contenedores ligeros en Linux, haciendo uso únicamente de librerías de sistema.',
       role: 'Desarrollo a bajo nivel',
       stackShort: 'C++ · Go',
-      overview1:
-        'Ledgerline nació para resolver un problema muy concreto: los equipos de tesorería perdían horas cada mes consolidando datos de varias fuentes antes de poder tomar decisiones.',
-      overview2:
-        'Conecté el panel directamente con las fuentes de datos vía WebSocket para actualizar los indicadores clave en tiempo real, reduciendo el tiempo de cierre mensual en un 40%.',
-      visual1Label: 'Panel financiero en vivo',
-      visual2Label: 'Sincronización en tiempo real',
+      about: [
+        {
+          type: 'p',
+          text: 'Todo el mundo conoce herramientas de gestión de contenedores como Docker o Podman. Estas herramientas se encargan de crear y gestionar contenedores ligeros para ejecutar aplicaciones de forma aislada. Sin embargo, muchas personas usan estas herramientas sin entender realmente cómo funciona o, incluso, qué es un contenedor en realidad. ¿Cómo son estas herramientas capaces de crear entornos ligeros completamente aislados que compartan el mismo kernel que el host?'
+        },
+        {
+          type: 'p',
+          text: 'Mi objetivo con este proyecto ha sido precisamente entender cómo funciona la contenerización y la creación de redes virtuales. fcontainers es un proyecto personal educativo que me ha permitido entender qué factores entran en juego en la contenerización. Por cuestiones evidentes, este proyecto no pretende funcionar sustituir herramientas completamente desarrolladas como las anteriormente mencionadas. Sin embargo, fcontainers destaca por haberse construido completamente desde cero y ser capaz de ejecutar contenedores en primer y segundo plano y conectarlos entre sí.',
+        },
+        {
+          type: 'p',
+          text: 'El proyecto está dividido en diferentes partes, tomando Docker como inspiración, que trabajan de forma conjunta:',
+        },
+        { 
+          type: 'list', 
+          items: [
+            {
+              title: "Runtime",
+              text: "este programa se encarga de ejecutar los contenedores y, en caso de ser en segundo plano, crear el proceso intermediario (shim)." 
+            },
+            {
+              title: "Daemon",
+              text: "el demonio de fcontainers es el que se encargará de gestionar todos los contenedores. Este proceso hará uso de runtime para crear los contenedores, controlará qué contenedores hay en ejecución, gestionará el acceso a aquellos en segundo plano y manejará la eliminación de los mismos cuando se solicite." 
+            },
+            {
+              title: "CLI",
+              text: "como indica su nombre, este programa es un CLI que permitirá interactuar con el daemon para manejar los contenedores de forma cómoda por el usuario." 
+            },
+          ],
+          
+        }
+
+        
+      ],
+      aboutmedia: {
+        cover: { type: 'image', src:"/proyectos/fcontainers/fcontainers_flujo.png", fit: 'contain'},
+        title: "Diagrama de flujo de fcontainers",
+      },
+      parts: [
+        {
+          title: "Runtime",
+          overviews: [
+            {
+              type: 'p',
+              text: '',
+            },
+          ],
+          media: {
+            cover: { type: 'color', c1: '#2a2050', c2: '#443577' },
+            title: "Diagrama concreto",
+          }
+        },
+        {
+          title: "Daemon",
+          overviews: [],
+          quote: "",
+          media: {
+            cover: { type: 'color', c1: '#2a2050', c2: '#443577' },
+            title: "Diagrama concreto",
+          }
+        },
+        {
+          title: "CLI",
+          overviews: [],
+          quote: "",
+          media: {
+            cover: { type: 'color', c1: '#2a2050', c2: '#443577' },
+            title: "Diagrama concreto",
+          }
+        }
+      ]
     },
     en: {
-      eyebrow: 'Financial dashboard · B2B SaaS',
+      eyebrow: 'Container manager · Personal project',
       title: 'fcontainers',
       tagline:
-        'Containerization system for creating and managing lightweight containers on Linux, using only system libraries.',
+      'Containerization system for creating and managing lightweight containers on Linux, using only system libraries.',
       summary:
-        'Containerization system for creating and managing lightweight containers on Linux, using only system libraries.',
+      'Containerization system for creating and managing lightweight containers on Linux, using only system libraries.',
       role: 'Low-level development',
       stackShort: 'C++ · Go',
-      overview1:
-        'Ledgerline was built to solve a very specific problem: treasury teams were losing hours every month consolidating data from several sources before they could make decisions.',
-      overview2:
-        'I connected the dashboard directly to the data sources over WebSocket to update key indicators in real time, cutting the monthly closing time by 40%.',
-      visual1Label: 'Live financial dashboard',
-      visual2Label: 'Real-time synchronization',
+      about: [
+        {
+          type: 'p',
+          text: 'Everyone knows container management tools like Docker or Podman. These tools handle the creation and management of lightweight containers to run applications in isolation. However, many people use these tools without really understanding how they work or, indeed, what a container actually is. How are these tools able to create fully isolated, lightweight environments that share the same kernel as the host?'
+        },
+        {
+          type: 'p',
+          text: 'My goal with this project has been precisely to understand how containerization and virtual networking work. fcontainers is a personal, educational project that has allowed me to understand the factors involved in containerization. For obvious reasons, this project is not intended to replace fully developed tools like the ones mentioned above. However, fcontainers stands out for having been built completely from scratch and for being able to run containers in the foreground and background and connect them to each other.',
+        },
+        {
+          type: 'p',
+          text: 'The project is divided into different parts, taking Docker as inspiration, which work together:',
+        },
+        { 
+          type: 'list', 
+          items: [
+            {
+              title: "Runtime",
+              text: "this program is responsible for running the containers and, if running in the background, creating the intermediary process (shim)." 
+            },
+            {
+              title: "Daemon",
+              text: "the fcontainers daemon is in charge of managing all the containers. This process uses the runtime to create containers, keeps track of which containers are running, manages access to background containers, and handles their removal when requested." 
+            },
+            {
+              title: "CLI",
+              text: "as its name indicates, this program is a CLI that allows the user to interact with the daemon in order to manage containers conveniently." 
+            },
+          ],
+        }
+      ],
+      aboutmedia: {
+        cover: { type: 'image', src:"/proyectos/fcontainers/fcontainers_flujo.png", fit: 'contain'},
+        title: "fcontainers flow diagram",
+      },
+      parts: [
+        {
+          title: "Runtime",
+          overviews: [
+            {
+              type: 'p',
+              text: '',
+            },
+          ],
+          media: {
+            cover: { type: 'color', c1: '#2a2050', c2: '#443577' },
+            title: "Detailed diagram",
+          }
+        },
+        {
+          title: "Daemon",
+          overviews: [],
+          media: {
+            cover: { type: 'color', c1: '#2a2050', c2: '#443577' },
+            title: "Detailed diagram",
+          }
+        },
+        {
+          title: "CLI",
+          overviews: [],
+          media: {
+            cover: { type: 'color', c1: '#2a2050', c2: '#443577' },
+            title: "Detailed diagram",
+          }
+        }
+      ]
     },
   },
   {
