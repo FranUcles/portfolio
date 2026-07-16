@@ -7,6 +7,7 @@ import CoverTemplate from './templates/CoverTemplate.astro';
 import TimelineTemplate from './templates/TimelineTemplate.astro';
 import CarouselTemplate from './templates/CarouselTemplate.astro';
 import PartsTemplate from './templates/PartsTemplate.astro';
+import SystemTemplate from './templates/SystemTemplate.astro';
 import { ui } from '../i18n/ui';
 
 export interface Props {
@@ -59,5 +60,6 @@ const base = lang === 'en' ? '/en' : '';
     {project.template === 'timeline' && <TimelineTemplate project={project} lang={lang} />}
     {project.template === 'carousel' && <CarouselTemplate project={project} lang={lang} />}
     {project.template === 'parts' && <PartsTemplate project={project} lang={lang} />}
+    {project.template === 'system' && <SystemTemplate project={project} lang={lang} />}
   </section>
 </BaseLayout>

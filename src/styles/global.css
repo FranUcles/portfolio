@@ -846,6 +846,136 @@ img.media-fill { cursor: zoom-in; }
   background: var(--accent-warm);
 }
 
+/* ---- Plantilla: SYSTEM (diagrama de red + servicios + clúster K8s) ---- */
+
+/* Diagrama principal: banner grande, con fondo oscuro por si el diagrama
+   tiene fondo transparente/blanco (usar fit:'contain' en el media). */
+.diagram-section { margin-bottom: 72px; }
+.diagram-section .eyebrow-small { display: block; }
+.diagram-banner {
+  height: 560px;
+  margin-bottom: 0;
+  margin-top: 10px;
+  background: var(--bg-dark);
+  background-image: radial-gradient(circle at 75% 15%, var(--bg-dark-2), var(--bg-dark) 65%);
+}
+
+/* Imágenes intercaladas dentro de un bloque de texto (OverviewBlocks) */
+.media-inline {
+  height: 380px;
+  margin: 8px 0 36px;
+  background: var(--bg-dark);
+}
+.media-inline--wide { height: 420px; }
+
+/* Servicios desplegados: bloques numerados, cada uno con su propio texto
+   e imágenes intercaladas en el punto exacto en que se explican. */
+.services-section { margin-top: 88px; }
+.services-section > h2 { margin-bottom: 1px; }
+.service-block:first-of-type {
+  margin-top: 0px;
+  padding-top: 28px;
+}
+.service-block {
+  margin-top: 56px;
+  padding-top: 28px;
+  border-top: 1px solid var(--card-border);
+}
+.service-block:first-of-type { border-top: none; }
+.service-head {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 24px;
+}
+.service-marker {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--bg-dark);
+  color: var(--accent-cool);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 19px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.service-head h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 24px;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+}
+.service-tagline {
+  font-size: 15px !important;
+  color: var(--accent-cool) !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.service-body { max-width: 900px; }
+.service-body p { margin-bottom: 20px; }
+
+/* Clúster de Kubernetes: panel oscuro diferenciado del resto de la página,
+   igual que result-banner, para que se lea como un bloque propio. */
+.cluster-panel {
+  margin-top: 88px;
+  background: radial-gradient(circle at 20% 20%, var(--bg-dark-2), var(--bg-dark) 70%);
+  border-radius: 22px;
+  padding: 56px 56px 64px;
+}
+.cluster-panel h2 { color: var(--text-on-dark); }
+.cluster-panel p { color: var(--muted-on-dark); }
+.cluster-panel .about-highlight-list li { color: var(--muted-on-dark); }
+.cluster-panel .about-highlight-list strong { color: var(--text-on-dark); }
+.cluster-panel .pull-quote { color: var(--text-on-dark); border-left-color: var(--accent-cool); }
+.cluster-panel .media-inline,
+.cluster-panel .media-inline--wide { background: var(--bg-dark-2); }
+.eyebrow-small--dark { color: var(--accent-cool); }
+
+.monitoring-block { margin-top: 48px; }
+.monitoring-block h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 19px;
+  color: var(--text-on-dark);
+  margin-bottom: 20px;
+}
+.monitor-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 16px;
+}
+.monitor-chip {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+.monitor-chip:hover { border-color: var(--accent-cool); background: rgba(255, 255, 255, 0.05); }
+.monitor-chip-icon { font-size: 22px; line-height: 1; }
+.monitor-chip strong {
+  display: block;
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 15px;
+  color: var(--text-on-dark);
+  margin-bottom: 3px;
+}
+.monitor-chip span {
+  display: block;
+  font-size: 13px;
+  color: var(--muted-on-dark);
+  line-height: 1.5;
+}
+
 /* ---------- RESPONSIVE ---------- */
 @media (max-width: 900px) {
   .project-grid { grid-template-columns: repeat(2, 1fr); }
@@ -867,6 +997,12 @@ img.media-fill { cursor: zoom-in; }
   .result-banner { padding: 32px 24px; }
   .carousel-slide { height: 240px; }
   .carousel-btn { width: 36px; height: 36px; }
+  .diagram-banner { height: 260px; }
+  .media-inline, .media-inline--wide { height: 220px; margin-bottom: 28px; }
+  .service-head { gap: 14px; }
+  .service-marker { width: 36px; height: 36px; font-size: 13px; }
+  .cluster-panel { padding: 36px 24px 40px; border-radius: 18px; }
+  .monitor-grid { grid-template-columns: 1fr; }
 }
 
 /* ---- Enumeración destacada dentro de .cover-content (about) ---- */
@@ -927,4 +1063,143 @@ img.media-fill { cursor: zoom-in; }
   background: linear-gradient(to top, rgba(0,0,0,0.65), rgba(0,0,0,0));
   z-index: 2;
   pointer-events: none;
+}
+
+/* =========================================
+   Sección de Retos y Soluciones
+   ========================================= */
+
+.challenges-section {
+  padding: 5rem 0; 
+  width: 100%;
+  background-color: var(--bg-color, transparent);
+  color: var(--text-color, inherit);
+}
+
+.challenges-section .container {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.challenges-section .section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 4rem;
+  letter-spacing: -0.02em;
+}
+
+
+.challenges-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  width: 100%;
+}
+
+.challenge-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  width: 100%;
+}
+
+
+.challenges-section .card {
+  flex: 1; 
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  background: var(--card-bg, #ffffff);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-color, #eaeaea);
+}
+
+@media (prefers-color-scheme: dark) {
+  .challenges-section .card {
+    background: var(--card-bg, #1a1a1a);
+    border-color: #333;
+  }
+}
+
+.challenges-section .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.challenges-section .card.challenge-card {
+  border-top: 4px solid #ef4444; 
+}
+
+.challenges-section .card.solution-card {
+  border-top: 4px solid #10b981; 
+}
+
+
+.challenges-section .card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.2rem;
+}
+
+.challenges-section .card-header h3 {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+
+.challenges-section .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  color: white;
+  flex-shrink: 0;
+}
+
+.challenge-icon {
+  background-color: #ef4444;
+}
+
+.solution-icon {
+  background-color: #10b981;
+}
+
+
+.challenges-section p {
+  margin: 0;
+  line-height: 1.7;
+  opacity: 0.9;
+  font-size: 1.05rem;
+}
+
+.challenges-section .connector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.5;
+  flex-shrink: 0;
+  width: 60px;
+}
+
+@media (max-width: 768px) {
+  .challenge-row {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .challenges-section .card-header {
+    justify-content: center;
+  }
+
+  .challenges-section .connector {
+    transform: rotate(90deg);
+    margin: 1rem 0;
+  }
+  
 }

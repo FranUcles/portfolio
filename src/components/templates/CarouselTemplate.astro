@@ -1,6 +1,6 @@
 ---
 import { ui } from '../../i18n/ui';
-import Visual from '../Visual.astro';
+import Carousel from '../Carousel.astro';
 
 export interface Props {
   project: any;
@@ -16,21 +16,7 @@ const t = ui[lang].project;
 
 <div class="carousel-wrap">
   <h2>{t.screenshots}</h2>
-  <div class="carousel">
-    <div class="carousel-track">
-      {project.media.slides.map((m, i) => (
-        <div class="carousel-slide">
-          <Visual media={m} label={p.slideLabels[i]} />
-          <p>{p.slideLabels[i]}</p>
-        </div>
-      ))}
-    </div>
-    <button class="carousel-btn prev" aria-label="Prev">←</button>
-    <button class="carousel-btn next" aria-label="Next">→</button>
-  </div>
-  <div class="carousel-dots">
-    {project.media.slides.map((_, i) => <button class="carousel-dot" aria-label={`Slide ${i + 1}`} />)}
-  </div>
+  <Carousel slides={p.slides} />
 </div>
 <div class="cover-content">
   <h2>{t.about}</h2>

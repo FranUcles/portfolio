@@ -1,0 +1,24 @@
+---
+import Visual from './Visual.astro';
+
+export interface Props {
+  slides: any;
+}
+
+const { slides } = Astro.props;
+---
+
+<div class="carousel">
+    <div class="carousel-track">
+      {slides.map((slide) => (
+        <div class="carousel-slide">
+          <Visual media={slide.media} label={slide.label} />
+        </div>
+      ))}
+    </div>
+    <button class="carousel-btn prev" aria-label="Prev">←</button>
+    <button class="carousel-btn next" aria-label="Next">→</button>
+  </div>
+  <div class="carousel-dots">
+    {slides.map((_, i) => <button class="carousel-dot" aria-label={`Slide ${i + 1}`} />)}
+  </div>

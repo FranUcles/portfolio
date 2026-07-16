@@ -1,0 +1,21 @@
+---
+import { ui } from '../i18n/ui';
+
+export interface Props {
+  lang: 'es' | 'en';
+  content: string;
+}
+
+const { lang, content } = Astro.props;
+const t = ui[lang].project;
+---
+
+<div class="card solution-card">
+    <div class="card-header">
+        <span class="icon solution-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        </span>
+        <h3>{t.solution}</h3>
+    </div>
+    <p>{content}</p>
+</div>

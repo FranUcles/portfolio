@@ -8,16 +8,6 @@ export const projects = [
     thumb: 4,
     year: '2025',
     category: 'work',
-    media: {
-      slides: [
-        { type: 'image', src: '/proyectos/aplicaciondocumentacion/empresa.png' },
-        { type: 'image', src: '/proyectos/aplicaciondocumentacion/trabajadores.png' },
-        { type: 'image', src: '/proyectos/aplicaciondocumentacion/vehiculos.png' },
-        { type: 'image', src: '/proyectos/aplicaciondocumentacion/nominas.png' },
-        { type: 'image', src: '/proyectos/aplicaciondocumentacion/descargar_nominas.png' },
-        { type: 'image', src: '/proyectos/aplicaciondocumentacion/clasificar_tacografos.png' },
-      ],
-    },
     tags: ['Python', 'Mircosoft Access', 'Excel'],
     links: {},
     es: {
@@ -42,14 +32,32 @@ export const projects = [
 
         'A continuación, se muestran capturas de pantalla del software en funcionamiento. En ellas se puede apreciar como hay diferentes categorías para llevar a cabo toda la gestión de los datos de la empresa, la clasificación de documentos y la posibilidad de descargarlos para revisarlos. Dado que es un software propietario, las imágenes contendrán texto genérico que no exponga ningún dato sensible de la misma.',
       ],
-      slideLabels: [
-        'Panel de la empresa',
-        'Panel trabajadores',
-        'Panel vehículos',
-        'Panel listado de nóminas',
-        'Panel descarga de nóminas',
-        'Panel clasificación de tacógrafos',
-      ],
+      slides: [
+        {
+          media: { type: 'image', src: '/proyectos/aplicaciondocumentacion/empresa.png' },
+          label: 'Panel de la empresa'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/aplicaciondocumentacion/trabajadores.png' },
+          label: 'Panel trabajadores'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/aplicaciondocumentacion/vehiculos.png' },
+          label: 'Panel vehículos'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/aplicaciondocumentacion/nominas.png' },
+          label: 'Panel listado de nóminas'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/aplicaciondocumentacion/descargar_nominas.png' },
+          label: 'Panel descarga de nóminas'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/aplicaciondocumentacion/clasificar_tacografos.png' },
+          label: 'Panel clasificación de tacógrafos'
+        },
+      ]
     },
     en: {
       eyebrow: 'Desktop app · Work project',
@@ -73,14 +81,32 @@ export const projects = [
 
         'Below are screenshots of the software in action. They show the different categories used to manage all of the company\'s data, the classification of documents, and the ability to download them for review. Since this is proprietary software, the images contain generic text that does not expose any of the company\'s sensitive data.',
       ],
-      slideLabels: [
-        'Company panel',
-        'Employees panel',
-        'Vehicles panel',
-        'Payroll list panel',
-        'Payroll download panel',
-        'Tachograph classification panel',
-      ],
+      slides: [
+        {
+          media: { type: 'image', src: '/proyectos/aplicaciondocumentacion/empresa.png' },
+          label: 'Company panel'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/aplicaciondocumentacion/trabajadores.png' },
+          label: 'Employees panel'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/aplicaciondocumentacion/vehiculos.png' },
+          label: 'Vehicles panel'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/aplicaciondocumentacion/nominas.png' },
+          label: 'Payroll list panel'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/aplicaciondocumentacion/descargar_nominas.png' },
+          label: 'Payroll download panel'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/aplicaciondocumentacion/clasificar_tacografos.png' },
+          label: 'Tachograph classification panel'
+        },
+      ]
     },
   },
   {
@@ -132,14 +158,13 @@ export const projects = [
             },
           ],
           
-        }
-
-        
+        },
+        {
+          type: "image",
+          media: { type: 'image', src:"/proyectos/fcontainers/fcontainers_flujo.png", fit: 'contain'},
+          label: "Diagrama de flujo de fcontainers",
+        }  
       ],
-      aboutmedia: {
-        cover: { type: 'image', src:"/proyectos/fcontainers/fcontainers_flujo.png", fit: 'contain'},
-        title: "Diagrama de flujo de fcontainers",
-      },
       parts: [
         {
           title: "Runtime",
@@ -197,12 +222,13 @@ export const projects = [
             {
               type: 'p',
               text: 'Por último, quiero hacer mención a cómo el daemon y el CLI manejan la conexión al contenedor. Este precisa de comunicación previa del fcontainersd hacia el fcontainers-shim, a través del socjet, para indicarle el tipo de conexión (attatch o exec) que quiere el cliente. Posteriormente, se le envía al CLI el socket en el que el shim estará manejando la solicitud realizada.'
+            },
+            {
+              type: 'image',
+              media: { type: 'image', src: '/proyectos/fcontainers/flujo_exec.png' },
+              label: "Diagrama de flujo de commando exec",
             }
           ],
-          media: {
-            cover: { type: 'image', src: '/proyectos/fcontainers/flujo_exec.png' },
-            title: "Diagrama de flujo de commando exec",
-          }
         },
       ]
     },
@@ -210,9 +236,9 @@ export const projects = [
       eyebrow: 'Container manager · Personal project',
       title: 'fcontainers',
       tagline:
-      'Containerization system for creating and managing lightweight containers on Linux, using only system libraries.',
+        'Containerization system for creating and managing lightweight containers on Linux, using only system libraries.',
       summary:
-      'Containerization system for creating and managing lightweight containers on Linux, using only system libraries.',
+        'Containerization system for creating and managing lightweight containers on Linux, using only system libraries.',
       role: 'Low-level development',
       stackShort: 'C++ · Go',
       about: [
@@ -233,7 +259,7 @@ export const projects = [
           items: [
             {
               title: "Runtime",
-              text: "this program is responsible for running the containers and, if running in the background, creating the intermediary process (shim)." 
+              text: "this program is responsible for running the containers and, if running in the background, creating the intermediary process (fcontainers-shim)." 
             },
             {
               title: "Daemon",
@@ -244,54 +270,89 @@ export const projects = [
               text: "as its name indicates, this program is a CLI that allows the user to interact with the daemon in order to manage containers conveniently." 
             },
           ],
+          
+        },
+        {
+          type: "image",
+          media: { type: 'image', src:"/proyectos/fcontainers/fcontainers_flujo.png", fit: 'contain'},
+          label: "fcontainers flow diagram",
         }
+        
       ],
-      aboutmedia: {
-        cover: { type: 'image', src:"/proyectos/fcontainers/fcontainers_flujo.png", fit: 'contain'},
-        title: "fcontainers flow diagram",
-      },
       parts: [
         {
           title: "Runtime",
           overviews: [
             {
               type: 'p',
-              text: '',
+              text: 'The runtime is a program written in C++ whose goal is to create the container. The first thing worth noting is the choice of programming language. Although the whole project could have been done in Go, I chose C++ for the runtime for one main reason: to keep the creation of the container as close to the OS as possible. For practicality, I did not resort to syscalls directly, but I found it interesting and much more educational to experiment with the C standard library wrappers.',
             },
+            {
+              type: 'p',
+              text: 'A very important aspect that the runtime handles is connectivity. This program also takes care of creating a virtual switch so that containers can communicate both with each other and with the outside world. This was done using the libnl library, which allows NETLINK messages to be encapsulated in a convenient and simple way. Thanks to it, interfaces are created that connect the host and the container.'
+            },
+            {
+              type: 'p',
+              text: 'A complex part of the project was designing the background execution system. A mechanism is needed to be able to create processes within this new container. This translates into being able to create processes in the same set of pid, mount, net, user, cgroups, and ipc namespaces as the process acting as init inside the container. For this task, and taking Docker as a reference, the concept of the fcontainers-shim was introduced.'
+            },
+            {
+              type: 'p',
+              text: 'The fcontainer-shim is a process that acts as an intermediary between the world of the container and the world of the host. It listens on a socket waiting for attach or exec commands to run inside the container and redirect its input/output. Although this process could have been integrated as part of the container\'s init, I decided to create it as a separate process alongside init in order to keep the concepts separate.'
+            },
+            {
+              type: 'quote',
+              quote: 'A simple runtime that, thanks to minimal dependencies, manages to produce fully isolated and functional containers.'
+            }
           ],
-          media: {
-            cover: { type: 'color', c1: '#2a2050', c2: '#443577' },
-            title: "Detailed diagram",
-          }
         },
         {
-          title: "Daemon",
-          overviews: [],
-          media: {
-            cover: { type: 'color', c1: '#2a2050', c2: '#443577' },
-            title: "Detailed diagram",
-          }
+          title: "Daemon-CLI",
+          overviews: [
+            {
+              type: 'p',
+              text: 'Both the daemon and the CLI are two tools that work in tandem to allow the end user to perform actions on containers transparently with respect to the architecture. Both programs were developed within the same Go project for several reasons.'
+            },
+            {
+              type: 'list',
+              items: [
+                {
+                  title: "Goroutines",
+                  text: "Go is a programming language that allows thousands of tasks to run simultaneously with little complexity thanks to goroutines. It also has the standard net library, which greatly simplifies the management of sockets and connections. For this reason, it was decided to implement the daemon in Go." 
+                },
+                {
+                  title: "Cobra",
+                  text: "the Cobra library makes it incredibly easy to configure the commands that can or cannot be run in a Go program. This way, a CLI can be built in Go with just a few lines of code." 
+                },
+                {
+                  title: "Shared protocol",
+                  text: "as mentioned above, both the daemon and the CLI were developed in Go, but the decision to keep them within the same project stems from the dependency between them. The CLI must be able to communicate effectively with the daemon, so both must share a common protocol. Thanks to Go's types, two programs within the same Go project can handle the encoding and decoding of a shared protocol without extra processes." 
+                },
+              ]
+            },
+            {
+              type: 'p',
+              text: 'As for how it works, the daemon is responsible for running the runtime to create the containers and stores all the relevant information about them in a JSON file. For example, it stores a container ID, its name, its PID, its state, and also the connection socket to the associated shim. This way, a correspondence is maintained between a container and the communication channel with its associated shim, which handles all of its requests.'
+            },
+            {
+              type: 'p',
+              text: 'Finally, I want to mention how the daemon and the CLI handle the connection to the container. This requires prior communication from fcontainersd to the fcontainers-shim, through the socket, to indicate the type of connection (attach or exec) the client wants. Afterward, the CLI is sent the socket on which the shim will be handling the requested operation.'
+            },
+            {
+              type: 'image',
+              media: { type: 'image', src: '/proyectos/fcontainers/flujo_exec.png' },
+              label: "Exec command flow diagram",
+            }
+          ],
         },
-        {
-          title: "CLI",
-          overviews: [],
-          media: {
-            cover: { type: 'color', c1: '#2a2050', c2: '#443577' },
-            title: "Detailed diagram",
-          }
-        }
       ]
     },
   },
   {
     slug: 'doraemon',
-    template: 'cover',
+    template: 'system',
     thumb: 2,
     year: '2025/2026',
     category: 'academic',
-    media: {
-      cover: { type: 'color', c1: '#2a2050', c2: '#443577' },
-    },
     tags: ['VirtualBox', 'Cyberpanel', 'Greenbone', 'Dovecot', 'Postfix', 'Apache', 'BindDNS', 'MariaDB', 'OpenLDAP', 'OpenVPN', 'nmap', 'Nagios', 'Ntop', 'K8s', 'Snort', 'Overleaf'],
     links: {
       repo: '',
@@ -305,16 +366,36 @@ export const projects = [
       summary:
         'Diseño e implementación de un topología de red y servicios asociados para dos empresas ficticias en un entorno virtualizado.',
       role: 'Diseño y despliegue',
-      stackShort: 'VirtualBox',
-      overview1:
-        'Bay.js surgió de la necesidad de crear componentes reutilizables en proyectos con políticas de seguridad de contenido (CSP) muy restrictivas, donde la mayoría de librerías populares no funcionaban.',
-      overview2:
-        'El resultado es una librería de menos de 11kb minificada, sin dependencias, que no usa eval ni new Function, disponible como paquete npm o directamente en un build step.',
-      quote: 'Menos de 11kb, cero dependencias, compatible con las políticas CSP más estrictas.',
-      stats: [
-        ['<11kb', 'Tamaño del bundle'],
-        ['0', 'Dependencias'],
-        ['100%', 'Compatible con CSP'],
+      stackShort: 'VirtualBox · Docker · K8s',
+      architecture: {
+        intro: [
+          { type: 'p', text: 'Contexto general del sistema...' },
+        ],
+        diagram: {
+          cover: { type: 'image', src: '/proyectos/sistema/diagrama-red.png', fit: 'contain' },
+          title: 'Diagrama general de la red',
+        }
+      },
+      services: [
+        {
+          title: 'API Gateway',
+          tagline: 'Punto de entrada único',
+          overviews: [
+            { type: 'p', text: 'Explico el gateway...' },
+            { type: 'image', media: { type: 'image', src: '/proyectos/sistema/gateway.png' }, label: 'Panel del gateway' },
+            { type: 'p', text: 'Sigo explicando tras la imagen...' },
+          ],
+        },
+        {
+          title: 'API Gateway',
+          tagline: 'Punto de entrada único',
+          overviews: [
+            { type: 'p', text: 'Explico el gateway...' },
+            { type: 'image', media: { type: 'image', src: '/proyectos/sistema/gateway.png' }, label: 'Panel del gateway' },
+            { type: 'p', text: 'Sigo explicando tras la imagen...' },
+          ],
+        },
+        // más servicios...
       ],
     },
     en: {
@@ -326,25 +407,44 @@ export const projects = [
         'Design and implementation of a network topology and associated services for two fictitious companies in a virtualized environment.',
       role: 'Design & deploy',
       stackShort: 'VirtualBox',
-      overview1:
-        'Bay.js came out of the need to build reusable components in projects with very strict Content Security Policies (CSP), where most popular libraries simply did not work.',
-      overview2:
-        'The result is a library under 11kb minified, with zero dependencies, that never uses eval or new Function, available as an npm package or dropped straight into a build step.',
-      quote: 'Under 11kb, zero dependencies, compatible with the strictest CSP policies.',
-      stats: [
-        ['<11kb', 'Bundle size'],
-        ['0', 'Dependencies'],
-        ['100%', 'CSP compatible'],
+      architecture: {
+        intro: [
+          { type: 'p', text: 'Contexto general del sistema...' },
+        ],
+        diagram: {
+          cover: { type: 'image', src: '/proyectos/sistema/diagrama-red.png', fit: 'contain' },
+          title: 'Diagrama general de la red',
+        }
+      },
+      services: [
+        {
+          title: 'API Gateway',
+          tagline: 'Punto de entrada único',
+          overviews: [
+            { type: 'p', text: 'Explico el gateway...' },
+            { type: 'image', media: { type: 'image', src: '/proyectos/sistema/gateway.png' }, label: 'Panel del gateway' },
+            { type: 'p', text: 'Sigo explicando tras la imagen...' },
+          ],
+        },
+        {
+          title: 'API Gateway',
+          tagline: 'Punto de entrada único',
+          overviews: [
+            { type: 'p', text: 'Explico el gateway...' },
+            { type: 'image', media: { type: 'image', src: '/proyectos/sistema/gateway.png' }, label: 'Panel del gateway' },
+            { type: 'p', text: 'Sigo explicando tras la imagen...' },
+          ],
+        },
+        // más servicios...
       ],
     },
   },
   {
     slug: 'homelab',
-    template: 'timeline',
+    template: 'system',
     thumb: 3,
     year: '2025/2026',
     category: 'personal',
-    media: {},
     tags: ['ProxmoxVE', 'WebServices', 'Wireguard', 'Nginx', 'Cloudflare', 'Jellyfin', 'Immich', 'Authelia', 'OPNsense'],
     links: {
       repo: '',
@@ -359,36 +459,192 @@ export const projects = [
         'Homelab que provee y expone servicios tanto a la red pública como a una red privada accedida mediante una VPN.',
       role: 'Diseño y despliegue',
       stackShort: 'ProxmoxVE · Nginx · Cloudflare',
-      phases: [
-        ['Problema', 'Los paneles de consentimiento de cookies existentes eran pesados o difíciles de personalizar para marcas pequeñas.'],
-        ['Diseño', 'Definí un sistema de temas basado en variables CSS que cualquiera pudiera adaptar sin tocar el JavaScript.'],
-        ['Desarrollo', 'Construí el plugin con JavaScript vanilla y SCSS, empaquetado con Parcel para mantenerlo ligero.'],
-        ['Lanzamiento', 'Lo publiqué como paquete npm, con documentación y varios temas de ejemplo listos para usar.'],
+      architecture: {
+        intro: [
+          { 
+            type: 'p', 
+            text: 'Cuando estaba en el último curso de la carrera de informática tuve que llevar a cabo un proyecto donde necesitaba desplegar simular un red completa. Además, tenía la necesidad de desplegar de forma manual muchos de los servicios que la red debía proveer. Este trabajo me enseñó que no resulta complicado montar ciertos servicios siempre y cuando se tuviera una maquina donde ejecutarlos. Y ahí me pregunté, ¿por qué no hacer yo lo mismo con un ordenador viejo? Así nació este proyecto de homelab y, tras investigar, descubrí que era un mundo con infinitas posibilidades.' 
+          },
+          { 
+            type: 'p', 
+            text: 'Inicialmente, y siguiendo la línea del trabajo de la universidad, decidí montarlo utilizando una imagen base de Debian server. De esta manera, cada servicio debía ser montado y configurado con cuidado por mi parte. Más tarde descubrí ProxmoxVE y eso cambió completamente la forma de gestionar el homelab. ProxmoxVE es un sistema operativo que funciona como hipervisor tipo 1 y que posee una enorme comunidad que, usando scripts, te permite desplegar un servicio en cuestión de minutos. Más allá de la facilidad de desplegar servicios, la faceta de hipervisor de este sistema operativo abría una nueva posibilidad: maquinas virtuales remotas.' 
+          },
+          { 
+            type: 'p', 
+            text: 'Durante el desarrollo del proyecto mencionado al inicio me topé con una complicación importante: necesitaba demasiadas máquinas virtuales. Al tener que simular una topología de ser de dos empresas eran necesarias más maquinas virtuales de las que mi ordenador era capaz de sostener comodamente. Gracias a ProxmoxVE esta limitante queda resuelta gracias a la posibilidad de conectarse a maquinas virtuales que se ejecutan en ProxmoxVE. Además, al ser un hipervisor tipo 1, ProxmoxVE es mucho más eficiente que otras herramientas de virtualización como VirtualBox.' 
+          },
+        ],
+      },
+      services: [
+        {
+          title: 'Immich',
+          tagline: 'Nube de fotos privada',
+          overviews: [
+            { type: 'p', text: 'Immich es un servicio que permite tener una nube al puro estilo de Google Fotos. Esto me ha permitido no depender de suscripciones para mis imágenes y videos; garantizando que si mi móvil se rompe, mi contenido se encuentra a salvo. Además, haciendo uso de sus usuarios me ha permitido compartir este servicio con familiares y amigos.' },
+          ],
+        },
+        {
+          title: 'Jellyfin',
+          tagline: 'Servicio de streaming privado',
+          overviews: [
+            { type: 'p', text: 'Jellyfin es un servicio de streaming de audio y video al estilo de Netflix. A diferencia de Immich, este servicio no sustituye a Netflix pues no cuenta con un catálogo tan extenso. Sin embargo, me ha permitido disfrutar de peliculas y series que tenía en casa en formato físico. Mucho de este contenido no está en otras plataformas y me parecia una pena dejar de disfrutar de este contenido por no tener un reproductor DVD a mano. Además, Jellyfin permite reproducción en dispositivos tipo ChromeCast y así tengo todo el contenido en cualquier parte. ¿Quién no quiere eso?' },
+          ],
+        },
+        {
+          title: 'Servidor Nginx',
+          tagline: 'Servidor web',
+          overviews: [
+            { type: 'p', text: 'Nginx es un conocido servidor web que me ha permitido desplegar cualquier página web que desee. Tener un servicio de este estilo proporciona una gran versatilidad ya que me permite servir cualquier contenido que quiera publicar. De hecho, este mismo portfolio se sirve gracias a este servidor web. Otro ejemplo de uso es el distribuir documentos PDFs relevantes para mi como mi CV o mis informes de los TFGs.' },
+          ],
+        },
+        {
+          title: 'Laboratorio virtual',
+          tagline: 'Entorno de maquinas virtuales aisladas',
+          overviews: [
+            { type: 'p', text: 'Este es el servicio más curioso de todos. Gracias a la versatilidad y la eficiencia de ProxmoxVE ejecutando maquinas virtuales, decidí montar un servicio de laboratorios virtuales. Este es completamente privado.' },
+            { type: 'p', text: 'Para poder crear las maquinas virtuales y las redes entre ellos, como en VirtualBox, es necesario tener acceso al panel de ProxmoxVE. Este acceso está muy protegido ya que precisa de un usuario y contraseña de Authelia para acceder a la página de selección de nodo; luego también será necesario un usuario con permisos y contraseña de ProxmoxVe del nodo asignado. De esta manera, se garantiza una gran protección para gestionar las maquinas virtuales y las redes del labortatorio.'},
+            { type: 'p', text: 'Para acceder a la red de las maquinas virtuales, se necesita un certificado válido de una VPN creada con Wireguard. Esta es la forma más segura de permitir el acceso a la red interna de las maquinas virtuales desde internet. Aunque se podría usar Wireguard en el propio ProxmoxVE, he considerado usar OPNsense para esta labor. Todas las maquinas virtuales necesitan un router para controlar quien accede a internet y quien. Para cubrir ambas necesidades, la VPN y el router, decidí montar y configurar un router OPNsense que vigila toda la red del laboratorio virtual.'}
+          ],
+        }
       ],
-      stats: [
-        ['npm', 'Publicado como paquete'],
-        ['0', 'Dependencias externas'],
-        ['∞', 'Temas personalizables'],
+      challenges: [
+        {
+          challenge: 'Disponer de un dominio y un DNS para poder acceder a los servicios públicos desde cualquier parte.',
+          solution: 'Adquirir un dominio usando Cloudflare para usar su servicio gratuito de DNS.'
+        },
+        {
+          challenge: 'Evitar que la dirección IP del servidor se filtre comprometiendo así la seguridad del sistema.',
+          solution: 'Hacer uso de Cloudflare Tunnel para garantizar anonimato y conseguir protección DDoS.'
+        },
+        {
+          challenge: 'Getionar el acceso al panel de control de ProxmoxVE cuando hay más de un servidor sin utilizar Proxmox Cluster.',
+          solution: 'Servir una página web personalizada que permita seleccionar a cuales de los servidores Proxmox se quiere acceder.'
+        },
+        {
+          challenge: 'Evitar el acceso a aquellos servicios que son privados e incluso a la página de selección de clúster. Solo los usuarios autenticados y autorizados deben acceder.',
+          solution: 'Utilizar Authelia como proxy que permita interceptar todas las peticiones a servicios privados y garantizar la autenticación y autorización del usuario.'
+        }
       ],
+      slides: [
+        {
+          media: { type: 'image', src: '/proyectos/homelab/login_proxmox.png' },
+          label: 'Inicio de sesión de Proxmox'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/homelab/node1.png' },
+          label: 'Panel de Proxmox del primer nodo con sus servicios'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/homelab/node2.png' },
+          label: 'Panel de Proxmox del segundo nodo con sus maquinas virtuales'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/homelab/select_node.png' },
+          label: 'Página de selección de nodos del homelab'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/homelab/opnsense.png' },
+          label: 'Panel de OPNsense del laboratorio virtual'
+        }
+      ]
     },
     en: {
-      eyebrow: 'Homelab  · Personal project',
+      eyebrow: 'Homelab · Personal project',
       title: 'Homelab',
-      tagline: 'Homelab that provides and exposes various services to both the public network and a private network accessed via VPN. These services range from a web server to a private video and audio streaming service. It also allows labs to be carried out remotely in isolated, fully virtualized environments.',
-      summary: 'Homelab that provides and exposes services to both the public network and a private network accessed via VPN.',
-      role: 'Design & deploy',
+      tagline:
+        'Homelab that provides and exposes different services to both the public network and a private network accessed via a VPN. These services range from a web server to a private video and audio streaming service. In addition, it also allows conducting laboratories in isolated and fully virtualized environments remotely.',
+      summary:
+        'Homelab that provides and exposes services to both the public network and a private network accessed via a VPN.',
+      role: 'Design and deployment',
       stackShort: 'ProxmoxVE · Nginx · Cloudflare',
-      phases: [
-        ['Problem', 'Existing cookie-consent banners were heavy or hard to customize for smaller brands.'],
-        ['Design', 'I defined a CSS-variable-based theming system anyone could adapt without touching the JavaScript.'],
-        ['Build', 'I built the plugin with vanilla JavaScript and SCSS, bundled with Parcel to keep it lightweight.'],
-        ['Launch', 'Published it as an npm package, with documentation and several ready-made example themes.'],
+      architecture: {
+        intro: [
+          { 
+            type: 'p', 
+            text: 'During my final year of my Computer Science degree, I had to carry out a project where I needed to deploy and simulate a complete network. Additionally, I needed to manually deploy many of the services that the network was supposed to provide. This work taught me that setting up certain services is not complicated as long as you have a machine to run them on. And that\'s when I asked myself: why not do the same with an old computer? Thus, this homelab project was born and, after researching, I discovered it was a world of infinite possibilities.' 
+          },
+          { 
+            type: 'p', 
+            text: 'Initially, following the line of my university work, I decided to set it up using a Debian server base image. This way, each service had to be carefully set up and configured by me. Later, I discovered ProxmoxVE, and that completely changed how I managed the homelab. ProxmoxVE is an operating system that functions as a type 1 hypervisor and has a huge community that, using scripts, allows you to deploy a service in a matter of minutes. Beyond the ease of deploying services, the hypervisor aspect of this operating system opened up a new possibility: remote virtual machines.' 
+          },
+          { 
+            type: 'p', 
+            text: 'During the development of the project mentioned at the beginning, I ran into a major complication: I needed too many virtual machines. Having to simulate a network topology for two companies required more virtual machines than my computer could comfortably handle. Thanks to ProxmoxVE, this limitation was resolved due to the ability to connect to virtual machines running on ProxmoxVE. Furthermore, being a type 1 hypervisor, ProxmoxVE is much more efficient than other virtualization tools like VirtualBox.' 
+          },
+        ],
+      },
+      services: [
+        {
+          title: 'Immich',
+          tagline: 'Private photo cloud',
+          overviews: [
+            { type: 'p', text: 'Immich is a service that allows you to have a cloud in the pure style of Google Photos. This has allowed me to not rely on subscriptions for my images and videos, ensuring that if my phone breaks, my content is safe. Moreover, making use of its user management, I\'ve been able to share this service with family and friends.' },
+          ],
+        },
+        {
+          title: 'Jellyfin',
+          tagline: 'Private streaming service',
+          overviews: [
+            { type: 'p', text: 'Jellyfin is an audio and video streaming service in the style of Netflix. Unlike Immich, this service does not replace Netflix as it doesn\'t have such an extensive catalog. However, it has allowed me to enjoy movies and series that I had at home in physical format. Much of this content is not available on other platforms, and it seemed a shame to stop enjoying it just because I didn\'t have a DVD player at hand. Additionally, Jellyfin allows playback on Chromecast-type devices, so I have all the content anywhere. Who wouldn\'t want that?' },
+          ],
+        },
+        {
+          title: 'Nginx Server',
+          tagline: 'Web server',
+          overviews: [
+            { type: 'p', text: 'Nginx is a well-known web server that has allowed me to deploy any webpage I want. Having a service of this kind provides great versatility as it allows me to serve any content I want to publish. In fact, this very portfolio is served thanks to this web server. Another example of its use is distributing PDF documents relevant to me, such as my CV or my Bachelor\'s thesis reports.' },
+          ],
+        },
+        {
+          title: 'Virtual Lab',
+          tagline: 'Isolated virtual machine environment',
+          overviews: [
+            { type: 'p', text: 'This is the most curious service of all. Thanks to the versatility and efficiency of ProxmoxVE running virtual machines, I decided to set up a virtual lab service. This is completely private.' },
+            { type: 'p', text: 'To be able to create the virtual machines and the networks between them, like in VirtualBox, you need access to the ProxmoxVE panel. This access is highly protected as it requires an Authelia username and password to access the node selection page; then a ProxmoxVE user with permissions and password for the assigned node is also required. This guarantees great protection for managing the virtual machines and the laboratory networks.'},
+            { type: 'p', text: 'To access the virtual machines\' network, a valid certificate from a VPN created with WireGuard is required. This is the most secure way to allow access to the internal network of the virtual machines from the internet. Although WireGuard could be used on ProxmoxVE itself, I chose to use OPNsense for this task. All virtual machines need a router to control who accesses the internet and who doesn\'t. To cover both needs—the VPN and the router—I decided to set up and configure an OPNsense router that oversees the entire virtual lab network.'}
+          ],
+        }
       ],
-      stats: [
-        ['npm', 'Published as a package'],
-        ['0', 'External dependencies'],
-        ['∞', 'Customizable themes'],
+      challenges: [
+        {
+          challenge: 'Having a domain and a DNS to be able to access public services from anywhere.',
+          solution: 'Acquiring a domain using Cloudflare to use its free DNS service.'
+        },
+        {
+          challenge: 'Preventing the server\'s IP address from leaking, thus compromising system security.',
+          solution: 'Using Cloudflare Tunnel to guarantee anonymity and achieve DDoS protection.'
+        },
+        {
+          challenge: 'Managing access to the ProxmoxVE control panel when there is more than one server without using Proxmox Cluster.',
+          solution: 'Serving a custom webpage that allows selecting which of the Proxmox servers to access.'
+        },
+        {
+          challenge: 'Preventing access to those services that are private, including the cluster selection page. Only authenticated and authorized users should have access.',
+          solution: 'Using Authelia as a proxy to intercept all requests to private services and guarantee user authentication and authorization.'
+        }
       ],
+      slides: [
+        {
+          media: { type: 'image', src: '/proyectos/homelab/login_proxmox.png' },
+          label: 'Proxmox login'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/homelab/node1.png' },
+          label: 'Proxmox panel of the first node with its services'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/homelab/node2.png' },
+          label: 'Proxmox panel of the second node with its virtual machines'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/homelab/select_node.png' },
+          label: 'Homelab node selection page'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/homelab/opnsense.png' },
+          label: 'OPNsense panel of the virtual lab'
+        }
+      ]
     },
   },
   {

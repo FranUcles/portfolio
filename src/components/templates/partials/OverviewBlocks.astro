@@ -1,0 +1,33 @@
+---
+import Visual from '../../Visual.astro';
+
+export interface Props {
+  blocks: any[];
+}
+
+const { blocks = [] } = Astro.props;
+---
+
+{blocks.map((block) => (
+  <Fragment>
+    {block.type === 'p' && <p>{block.text}</p>}
+
+    {block.type === 'list' && (
+      <ul class="about-highlight-list">
+        {block.items.map((item: any) => (
+          <li><strong>{item.title}:</strong> {item.text}</li>
+        ))}
+      </ul>
+    )}
+
+    {block.type === 'quote' && (
+      <blockquote class="pull-quote">{block.quote}</blockquote>
+    )}
+
+    {block.type === 'image' && (
+      <div class:list={['cover-banner', 'media-inline', { 'media-inline--wide': block.size !== 'inline' }]}>
+        <Visual media={block.media} label={block.label} />
+      </div>
+    )}
+  </Fragment>
+))}

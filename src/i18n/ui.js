@@ -36,6 +36,11 @@ export const ui = {
       theProcess: 'El proceso',
       result: 'Resultado',
       summary: 'Resumen',
+      architecture: 'Arquitectura del sistema',
+      services: 'Servicios desplegados',
+      challengesSolutions: 'Retos y Soluciones',
+      challenge: 'Reto',
+      solution: 'Solución'
     },
   },
   en: {
@@ -75,6 +80,11 @@ export const ui = {
       theProcess: 'The process',
       result: 'Result',
       summary: 'Summary',
+      architecture: 'System architecture',
+      services: 'Deployed services',
+      challengesSolutions: 'Challenges & Solutions',
+      challenge: 'Challenge',
+      solution: 'Solution'
     },
   },
 };

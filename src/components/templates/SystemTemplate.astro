@@ -1,0 +1,65 @@
+---
+import { ui } from '../../i18n/ui';
+import Visual from '../Visual.astro';
+import OverviewBlocks from './partials/OverviewBlocks.astro';
+import ChallengesSolutions from '../ChallengesSolutions.astro';
+import Carousel from '../Carousel.astro';
+
+export interface Props {
+  project: any;
+  lang: 'es' | 'en';
+}
+
+const { project, lang } = Astro.props;
+const p = project[lang];
+const t = ui[lang].project;
+const a = p.architecture;
+---
+
+{a?.diagram && (
+  <div class="cover-banner diagram-banner">
+    <Visual media={a.diagram.cover} label={a.diagram.title} />
+  </div>
+)}
+
+{a?.intro && (
+  <div class="cover-content">
+    <h2>{t.about}</h2>
+    <OverviewBlocks blocks={a.intro} />
+  </div>
+)}
+
+{p.services?.length > 0 && (
+  <div class="services-section">
+    <h2>{t.services}</h2>
+    {p.services.map((service: any, i: number) => (
+      <div class="service-block">
+        <div class="service-head">
+          <span class="service-marker">{String(i + 1).padStart(2, '0')}</span>
+          <div>
+            <h3>{service.title}</h3>
+            {service.tagline && <p class="service-tagline">{service.tagline}</p>}
+          </div>
+        </div>
+        <div class="service-body">
+          <OverviewBlocks blocks={service.overviews} />
+        </div>
+      </div>
+    ))}
+  </div>
+)}
+{p.challenges?.length > 0 && <ChallengesSolutions lang={lang} items={p.challenges} />}
+{p.slides?.length > 0 && (
+  <Fragment>
+    <h2>{t.screenshots}</h2>
+    <Carousel slides={p.slides} />
+  </Fragment>
+)}
+
+
+<div class="tech-section">
+  <h2>{t.tech}</h2>
+  <div class="tag-row">
+    {project.tags.map((tag: string) => <span>{tag}</span>)}
+  </div>
+</div>
