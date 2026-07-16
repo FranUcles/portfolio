@@ -1,3 +1,6 @@
+import { type } from "node:os";
+import { text } from "node:stream/consumers";
+
 export const projects = [
     {
     slug: 'aplicaciondocumentacion',
@@ -117,7 +120,7 @@ export const projects = [
           items: [
             {
               title: "Runtime",
-              text: "este programa se encarga de ejecutar los contenedores y, en caso de ser en segundo plano, crear el proceso intermediario (shim)." 
+              text: "este programa se encarga de ejecutar los contenedores y, en caso de ser en segundo plano, crear el proceso intermediario (fcontainers-shim)." 
             },
             {
               title: "Daemon",
@@ -143,32 +146,64 @@ export const projects = [
           overviews: [
             {
               type: 'p',
-              text: '',
+              text: 'El runtime es un programa escrito en C++ que tiene como objetivo crear el contenedor. La primero a destacar es la elección del lenguaje de programación. Aunque todo el proyecto podría haberse realizado en Go, elegí usar C++ para el runtime por una razón princiapl: mantener la creación del contener lo más cercano al SO posible. Por cuestiones de practicidad, no se ha recurrido a las syscalls directamente, pero me parecía interesante y mucho más educativo experimentar con los wrappers de la libería estándar de C.',
             },
+            {
+              type: 'p',
+              text: 'Un aspecto muy importante que maneja el runtime es la conectividad. Este programa se encarga también de crear un switch virtual para que los contenedores puedan comunicarse tanto entre ellos como con el exterior. Esto se ha realizado utilizando la librería libnl que permite encapsular mensajes NETLINK de forma cómoda y sencilla. Gracias a ella, se crean interfaces que conectan el host y el contenedor.'
+            },
+            {
+              type: 'p',
+              text: 'Una parte compleja del proyecto fue diseñar el sistema de ejecución en segundo plano. Es necesario un mecanismo para poder crear procesos en este nuevo contenedor. Esto se traduce en ser capaz de crear procesos en el mismo conjunto de pid, mount, net, user, cgroups e ipc namespaces que el proceso que hace de init en el contenedor. Para esta labor, y tomando Docker como referencia, se introdujo el concepto del fcontainers-shim.'
+            },
+            {
+              type: 'p',
+              text: 'El fcontainer-shim es un proceso que hace intermediario entre el mundo del contenedor y el mundo del host. Este queda escuchando en un socket a la espera de comandos attatch o exec para ejecutarlos dentor del contendor y redirigir la entrada/salida del mismo. Aunque este proceso podría haberse integrado como parte del init del contenedor, decidí crearlo como un proceso anexo al init con el objetivo de separar los conceptos.'
+            },
+            {
+              type: 'quote',
+              quote: 'Un runtime simple, pero que gracias a dependencias mínimas consigue generar contenedores completamente aislados y funcionales.'
+            }
+          ],
+        },
+        {
+          title: "Daemon-CLI",
+          overviews: [
+            {
+              type: 'p',
+              text: 'Tanto el daemon como el CLI son dos herramientas que trabajan en sintonía para permitir al usuario final ejecutar acciones sobre los contenedores de forma transparente a la arquitectura. Ambos programas han sido desarrollados en el mismo proyecto de Go por diversos motivos.'
+            },
+            {
+              type: 'list',
+              items: [
+                {
+                  title: "Goroutines",
+                  text: "Go es un lenguaje de programación que permite la ejecución de miles de tareas de forma simultánea sin gran complejidad gracias a las goroutines. Además, también dispone de la librería estándar net que simplifica mucho la gestión de sockets y conexiones. Por eso mismo, se decidió implementar el daemon en Go." 
+                },
+                {
+                  title: "Cobra",
+                  text: "la librería Cobra permite configurar los comandos que se pueden o no ejecutar en un programa de Go de forma increíblemente cómoda. De esta manera, con unas pocas líneas de código se puede crear un CLI en Go." 
+                },
+                {
+                  title: "Protocolo compartido",
+                  text: "por lo comentado anteriormente tanto el daemon como el CLI se desarrollaron en Go, pero la decición de mantenerlos en el mismo proyecto atiende a depenencia entre ellos. El CLI debe ser capaz de comunicarse eficazmente con el daemon, por lo tanto, ambos deben compartir un protocolo común. Gracias a los types de Go, dos programas en el mismo proyecto de Go pueden manejar la codificación y decodificación de un protocolo común sin procesos extras." 
+                },
+              ]
+            },
+            {
+              type: 'p',
+              text: 'En cuanto a su funcionamiento, el daemon se encarga de ejecutar el runtime para crear los contenedores y almacena en un fichero JSON toda la información relevante del mismo. Por ejemplo, aquí almacena un ID del contenedor, su nombre, su PID, su estado y también el socket de conexión con el shim asociado. De esta manera, se mantiene una correspondencia entre un contenedor y el canal de comunicación con su shim asociado que gestionará todas sus peticiones.'
+            },
+            {
+              type: 'p',
+              text: 'Por último, quiero hacer mención a cómo el daemon y el CLI manejan la conexión al contenedor. Este precisa de comunicación previa del fcontainersd hacia el fcontainers-shim, a través del socjet, para indicarle el tipo de conexión (attatch o exec) que quiere el cliente. Posteriormente, se le envía al CLI el socket en el que el shim estará manejando la solicitud realizada.'
+            }
           ],
           media: {
-            cover: { type: 'color', c1: '#2a2050', c2: '#443577' },
-            title: "Diagrama concreto",
+            cover: { type: 'image', src: '/proyectos/fcontainers/flujo_exec.png' },
+            title: "Diagrama de flujo de commando exec",
           }
         },
-        {
-          title: "Daemon",
-          overviews: [],
-          quote: "",
-          media: {
-            cover: { type: 'color', c1: '#2a2050', c2: '#443577' },
-            title: "Diagrama concreto",
-          }
-        },
-        {
-          title: "CLI",
-          overviews: [],
-          quote: "",
-          media: {
-            cover: { type: 'color', c1: '#2a2050', c2: '#443577' },
-            title: "Diagrama concreto",
-          }
-        }
       ]
     },
     en: {

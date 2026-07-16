@@ -45,9 +45,9 @@ const t = ui[lang].project;
         </Fragment>
       ))}
     </div>
-    <div class="cover-banner">
-      <Visual media={part.media.cover} label={`${part.media.title} — ${t.screenshots}`} />
-    </div>
+    {part.media && <div class="cover-banner">
+      <Visual media={part.media.cover} label={`${part.media.title}`} />
+    </div>}
   </>
 ))}
 <div class="tech-section" style="margin-left:auto;margin-right:auto;">
