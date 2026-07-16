@@ -649,13 +649,10 @@ export const projects = [
   },
   {
     slug: 'autocryoet',
-    template: 'cover',
+    template: 'workflow',
     thumb: 5,
     year: '2025/2026',
     category: 'academic',
-    media: {
-      cover: { type: 'color', c1: '#2a2050', c2: '#443577' },
-    },
     tags: ['Python', 'Machine Learning', 'Pandas', 'Numpy', 'DisPerSE', 'TomoTwin', 'VTK', 'Conda'],
     links: {
       repo: 'https://github.com/FranUcles/auto-cryoet',
@@ -670,34 +667,156 @@ export const projects = [
         'Herramienta de terminal para el análisis automatizado y no supervisado de tomogramas en criomicroscopia electrónica.',
       role: 'Análisis de datos e imágenes',
       stackShort: 'Python · Machine Learning · VTK · Conda',
-      overview1:
-        'Kernel Study es un proyecto personal para explicar de forma visual e interactiva cómo funcionan los algoritmos de planificación de procesos en un sistema operativo.',
-      overview2:
-        'El motor de simulación está escrito en Rust y compilado a WebAssembly por rendimiento, mientras que el renderizado interactivo se hace sobre Canvas directamente en el navegador.',
-      quote: 'Ver un algoritmo de scheduling ejecutarse paso a paso enseña más que cualquier diagrama estático.',
-      stats: [
-        ['60fps', 'Renderizado estable'],
-        ['6', 'Algoritmos simulados'],
-        ['100%', 'En el navegador'],
-      ],
+      workflow: {
+        intro: [
+          {
+            type: 'p',
+            text: 'Este proyecto forma parte de mi Trabajo Fin de Grado (TFG) de mi grado en Ingeniería Informática. Su objetivo es automatizar el análisis de tomogramas obtenidos con técnicas de crio-microscopía electrónica. Su enfoque es diseñar un flujo de trabajo que conecte herramientas ya existentes para crear un proceso automatizado y no supervisado.',
+          },
+          {
+            type: 'p',
+            text: 'Este trabajo supuso un reto en toda regla ya que trabaja con muchos campos de la informática como el análisis de imágenes, el machine learning y el análisis de datos. Este proyecto me ha permitido aprender mucho sobre manejo de datos utilizando Pandas y Numpy para manejar grandes volúmenes de datos. Además, hacer que herramientas tan diferentes como TomoTwin y DisPerSE trabajen en armonía, fue todo un reto.',
+          },
+          {
+            type: 'p',
+            text: 'A pesar de todas las complicaciones, finalmente conseguí desarrollar una herramienta de terminal que ejecuta todo un flujo de trabajo de forma autónoma. Solo es necesario darle información básica sobre el modelo de la red neuronal y ciertos parámetros para que la herramienta trabaje. Asimismo, en el repositorio de la herramienta también se detalla el proceso de instalación que cree para poder distribuir la herramienta cómodamente entre los potenciales usuarios. Aunque los detalles del desarrollo de la herramienta y de implementación son complejos y se pueden revisar en la documentación, a continuación se muestran las diferente etapas del flujo de trabajo con una breve descripción.',
+          },
+        ],
+        diagram: {
+          title: 'Diagrama del workflow de Auto-CryoET',
+          cover: { type: 'image', src: '/proyectos/autocryoet/workflow_completo.jpg' },
+        },
+        steps: [
+          {
+            title: 'Análisis del tomograma',
+            description:
+              'Esta es la primera etapa y se encarga de analizar el tomograma de entrada. La idea es utilizar la red neuronal de TomoTwin para extraer un mapa de 32 características de cada punto del tomograma. Posteriormente, haciendo uso de herramientas de reducción dimensional se obtendrá una nube de puntos en 2D.',
+            
+          },
+          {
+            title: 'Preprocesado',
+            description:
+              'Esta fase está desarrollado completamente en Python y es la encargada de generar una imagen 2D y una mácara a partir de la nube de puntos de la fase anterior. Estos dos elementos serán cruciales para que DisPerSE haga su análisis topológico. Además, esta fase también proporcionará la correspondencia entre los píxeles de la imagen y los puntos de la nube de puntos.',
+          },
+          {
+            title: 'Análisis topológico',
+            description:
+              'Haciendo uso de la herramienta DisPerSE, se realiza un análisis de la imagen para determinar qué zonas de la nube de puntos son más densas. Esas zonas son las que corresponderán a las estructuras del tomograma original.',
+          },
+          {
+            title: 'Postprocesado',
+            description:
+              'Esta fase utiliza Python para transformar el resultado de la fase anterior de vuelta al tomograma. Necesitamos seleccionar qué zonas del tomograma se corresponden con las zonas de la imagen seleccionada por el análisis de DisPerSE. Esto nos permitirá obtener la segmentación que estabamos buscando.',
+          },
+          {
+            title: 'Visualizado',
+            description:
+              'Esta fase es opcional y permite visualizar la segmentación del tomograma en una herramienta llamada Napari.',
+          },
+        ],
+      },
+      slides: [
+        {
+          media: { type: 'image', src: '/proyectos/autocryoet/workflow_init.png', fit: 'contain'},
+          label: 'Menú inicial en Auto-CryoET'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/autocryoet/workflow_select_etapas.png', fit: 'contain' },
+          label: 'Menú de selección de etapas a ejecutar en Auto-CryoET'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/autocryoet/workflow_completo_confirm.png', fit: 'contain' },
+          label: 'Resumen de todas las etapas del workflow en Auto-CryoET'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/autocryoet/workflow_ask_parameters.png', fit: 'contain' },
+          label: 'Solicitud de parámetros por parte de Auto-CryoET'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/autocryoet/workflow_success.png', fit: 'contain' },
+          label: 'Ejecución correcta del flujo completo de Auto-CryoET'
+        }
+      ]
     },
     en: {
       eyebrow: 'Tomogram analysis · Academic project',
       title: 'Auto-CryoET',
-      tagline: 'Terminal tool for automated, unsupervised analysis of tomograms in cryo-electron microscopy using discrete Morse theory.',
-      summary: 'Terminal tool for automated, unsupervised analysis of tomograms in cryo-electron microscopy ',
-      role: 'Image and data analysis',
+      tagline:
+        'Terminal tool for automated, unsupervised analysis of cryo-electron microscopy tomograms using discrete Morse theory.',
+      summary:
+        'Terminal tool for automated, unsupervised analysis of cryo-electron microscopy tomograms.',
+      role: 'Data and image analysis',
       stackShort: 'Python · Machine Learning · VTK · Conda',
-      overview1:
-        'Kernel Study is a personal project to explain, visually and interactively, how process-scheduling algorithms work inside an operating system.',
-      overview2:
-        'The simulation engine is written in Rust and compiled to WebAssembly for performance, while the interactive rendering happens on Canvas straight in the browser.',
-      quote: 'Watching a scheduling algorithm run step by step teaches more than any static diagram.',
-      stats: [
-        ['60fps', 'Stable rendering'],
-        ['6', 'Algorithms simulated'],
-        ['100%', 'Runs in the browser'],
-      ],
+      workflow: {
+        intro: [
+          {
+            type: 'p',
+            text: 'This project is part of my Bachelor\'s Thesis (TFG) for my degree in Computer Engineering. Its goal is to automate the analysis of tomograms obtained through cryo-electron microscopy techniques. Its approach is to design a workflow that connects existing tools to create an automated, unsupervised process.',
+          },
+          {
+            type: 'p',
+            text: 'This work was a real challenge, as it draws on many fields of computer science such as image analysis, machine learning, and data analysis. This project allowed me to learn a great deal about data handling using Pandas and Numpy to manage large volumes of data. In addition, getting tools as different as TomoTwin and DisPerSE to work in harmony was quite a challenge.',
+          },
+          {
+            type: 'p',
+            text: 'Despite all the complications, I eventually managed to develop a terminal tool that runs an entire workflow autonomously. It only needs basic information about the neural network model and certain parameters for the tool to work. The tool\'s repository also details the installation process I created in order to distribute the tool conveniently among potential users. Although the details of the tool\'s development and implementation are complex and can be reviewed in the documentation, the different stages of the workflow are shown below with a brief description.',
+          },
+        ],
+        diagram: {
+          title: 'Auto-CryoET workflow diagram',
+          cover: { type: 'image', src: '/proyectos/autocryoet/workflow_completo.jpg' },
+        },
+        steps: [
+          {
+            title: 'Tomogram analysis',
+            description:
+              'This is the first stage and handles the analysis of the input tomogram. The idea is to use the TomoTwin neural network to extract a 32-feature map for each point in the tomogram. Afterward, dimensionality reduction tools are used to obtain a 2D point cloud.',
+            
+          },
+          {
+            title: 'Preprocessing',
+            description:
+              'This phase is developed entirely in Python and is responsible for generating a 2D image and a mask from the point cloud produced in the previous phase. These two elements will be crucial for DisPerSE to perform its topological analysis. This phase also provides the correspondence between the pixels of the image and the points of the point cloud.',
+          },
+          {
+            title: 'Topological analysis',
+            description:
+              'Using the DisPerSE tool, the image is analyzed to determine which areas of the point cloud are densest. These areas are the ones that will correspond to the structures in the original tomogram.',
+          },
+          {
+            title: 'Postprocessing',
+            description:
+              'This phase uses Python to transform the result of the previous phase back into the tomogram. We need to select which areas of the tomogram correspond to the areas of the image selected by the DisPerSE analysis. This allows us to obtain the segmentation we were looking for.',
+          },
+          {
+            title: 'Visualization',
+            description:
+              'This phase is optional and allows the tomogram segmentation to be visualized in a tool called Napari.',
+          },
+        ],
+      },
+      slides: [
+        {
+          media: { type: 'image', src: '/proyectos/autocryoet/workflow_init.png', fit: 'contain'},
+          label: 'Initial menu in Auto-CryoET'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/autocryoet/workflow_select_etapas.png', fit: 'contain' },
+          label: 'Stage selection menu in Auto-CryoET'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/autocryoet/workflow_completo_confirm.png', fit: 'contain' },
+          label: 'Summary of all workflow stages in Auto-CryoET'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/autocryoet/workflow_ask_parameters.png', fit: 'contain' },
+          label: 'Auto-CryoET requesting parameters'
+        },
+        {
+          media: { type: 'image', src: '/proyectos/autocryoet/workflow_success.png', fit: 'contain' },
+          label: 'Successful execution of the full Auto-CryoET workflow'
+        }
+      ]
     },
   },
 ];

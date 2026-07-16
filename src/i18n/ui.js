@@ -40,7 +40,10 @@ export const ui = {
       services: 'Servicios desplegados',
       challengesSolutions: 'Retos y Soluciones',
       challenge: 'Reto',
-      solution: 'Solución'
+      solution: 'Solución',
+      workflow: 'Flujo de trabajo',
+      input: 'Entrada',
+      output: 'Salida'
     },
   },
   en: {
@@ -84,7 +87,10 @@ export const ui = {
       services: 'Deployed services',
       challengesSolutions: 'Challenges & Solutions',
       challenge: 'Challenge',
-      solution: 'Solution'
+      solution: 'Solution',
+      workflow: 'Workflow',
+      input: 'Input',
+      output: 'Output'
     },
   },
 };

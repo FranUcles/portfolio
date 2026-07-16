@@ -1,0 +1,110 @@
+---
+import { ui } from '../../i18n/ui';
+import Visual from '../Visual.astro';
+import OverviewBlocks from './partials/OverviewBlocks.astro';
+import Carousel from '../Carousel.astro';
+import ChallengesSolutions from '../ChallengesSolutions.astro';
+
+export interface Props {
+  project: any;
+  lang: 'es' | 'en';
+}
+
+const { project, lang } = Astro.props;
+const p = project[lang];
+const t = ui[lang].project;
+const w = p.workflow;
+---
+
+{w?.diagram && (
+  <div class="cover-banner diagram-banner">
+    <Visual media={w.diagram.cover} label={w.diagram.title} />
+  </div>
+)}
+
+{w?.intro && (
+  <div class="cover-content">
+    <h2>{t.about}</h2>
+    <OverviewBlocks blocks={w.intro} />
+  </div>
+)}
+
+{w?.steps?.length > 0 && (
+  <div class="workflow-section">
+    <h2>{t.workflow}</h2>
+    <div class="workflow-list">
+      {w.steps.map((step: any, i: number) => (
+        <div class="workflow-step">
+          <div class="workflow-step-head">
+            <span class="workflow-marker">{String(i + 1).padStart(2, '0')}</span>
+            <div>
+              <h3>{step.title}</h3>
+              {step.description && <p class="workflow-step-desc">{step.description}</p>}
+            </div>
+          </div>
+
+          {(step.input || step.output) && (
+            <div class="workflow-io">
+              {step.input && (
+                <div class="workflow-io-panel">
+                  <span class="workflow-io-label">{t.input}</span>
+                  <div class="media-inline">
+                    <Visual media={step.input.media} label={step.input.label} />
+                  </div>
+                </div>
+              )}
+
+              {step.input && step.output && (
+                <div class="workflow-io-arrow">
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M5 12h14"></path>
+                    <path d="m12 5 7 7-7 7"></path>
+                  </svg>
+                </div>
+              )}
+
+              {step.output && (
+                <div class="workflow-io-panel">
+                  <span class="workflow-io-label">{t.output}</span>
+                  <div class="media-inline">
+                    <Visual media={step.output.media} label={step.output.label} />
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
+{w?.stats?.length > 0 && (
+  <div class="result-banner">
+    <h2>{t.result}</h2>
+    <div class="stat-row">
+      {w.stats.map(([value, label]: [string, string]) => (
+        <div class="stat">
+          <strong>{value}</strong>
+          <span>{label}</span>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
+{p.challenges?.length > 0 && <ChallengesSolutions lang={lang} items={p.challenges} />}
+
+{p.slides?.length > 0 && (
+  <div class="carousel-wrap">
+    <h2>{t.screenshots}</h2>
+    <Carousel slides={p.slides} />
+  </div>
+)}
+
+<div class="tech-section">
+  <h2>{t.tech}</h2>
+  <div class="tag-row">
+    {project.tags.map((tag: string) => <span>{tag}</span>)}
+  </div>
+</div>
