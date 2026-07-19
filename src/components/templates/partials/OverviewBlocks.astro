@@ -29,5 +29,16 @@ const { blocks = [] } = Astro.props;
         <Visual media={block.media} label={block.label} />
       </div>
     )}
+
+    {block.type === 'callout' && (
+      <p class="overview-note">
+        {block.text}{' '}
+        {block.link && (
+          <a class="overview-note-link" href={block.link.href} target="_blank" rel="noopener">
+            {block.link.label} ↗
+          </a>
+        )}
+      </p>
+    )}
   </Fragment>
 ))}

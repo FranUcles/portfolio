@@ -9,6 +9,7 @@ import CarouselTemplate from './templates/CarouselTemplate.astro';
 import PartsTemplate from './templates/PartsTemplate.astro';
 import SystemTemplate from './templates/SystemTemplate.astro';
 import WorkflowTemplate from './templates/WorkflowTemplate.astro';
+import ProjectNav from './ProjectNav.astro';
 import { ui } from '../i18n/ui';
 
 export interface Props {
@@ -35,12 +36,10 @@ const base = lang === 'en' ? '/en' : '';
           <span class="value">{project.year}</span>
         </div>
         <div class="project-meta-item">
-          <span class="label">{t.roleLabel}</span>
-          <span class="value">{p.role}</span>
-        </div>
-        <div class="project-meta-item">
-          <span class="label">{t.stackLabel}</span>
-          <span class="value">{p.stackShort}</span>
+          <span class="label">{t.tech}</span>
+          <div class="tag-row">
+            {project.tags.map((tag: string) => <span>{tag}</span>)}
+          </div>
         </div>
       </div>
       <div class="project-links">
@@ -64,4 +63,6 @@ const base = lang === 'en' ? '/en' : '';
     {project.template === 'system' && <SystemTemplate project={project} lang={lang} />}
     {project.template === 'workflow' && <WorkflowTemplate project={project} lang={lang} />}
   </section>
+
+  <ProjectNav project={project} lang={lang} />
 </BaseLayout>

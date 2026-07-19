@@ -1,0 +1,39 @@
+---
+// Navegación al proyecto anterior / siguiente, en el orden en que aparecen
+// en data/projects.js. Da la vuelta al llegar al principio o al final.
+import { projects } from '../data/projects';
+import { ui } from '../i18n/ui';
+
+export interface Props {
+  project: any;
+  lang: 'es' | 'en';
+}
+
+const { project, lang } = Astro.props;
+const t = ui[lang].project;
+const base = lang === 'en' ? '/en' : '';
+
+const total = projects.length;
+const idx = projects.findIndex((pr) => pr.slug === project.slug);
+const prevProject = projects[(idx - 1 + total) % total];
+const nextProject = projects[(idx + 1) % total];
+---
+
+{total > 1 && (
+  <section class="project-nav">
+    <a class="project-nav-link project-nav-prev" href={`${base}/proyectos/${prevProject.slug}/`}>
+      <span class="project-nav-arrow">←</span>
+      <span class="project-nav-text">
+        <span class="project-nav-label">{t.prevProject}</span>
+        <span class="project-nav-title">{prevProject[lang].title}</span>
+      </span>
+    </a>
+    <a class="project-nav-link project-nav-next" href={`${base}/proyectos/${nextProject.slug}/`}>
+      <span class="project-nav-text">
+        <span class="project-nav-label">{t.nextProject}</span>
+        <span class="project-nav-title">{nextProject[lang].title}</span>
+      </span>
+      <span class="project-nav-arrow">→</span>
+    </a>
+  </section>
+)}

@@ -20,7 +20,7 @@ const homeHref = lang === 'en' ? '/en/' : '/';
   <nav class="topnav">
     <a href={`${homeHref}#work`}>{t.work}</a>
     <a href={`${homeHref}#contact`}>{t.contact}</a>
-    <a href="/cv/Francisco_Ucles_Ayllón_CV.pdf" target="_blank" rel="noopener">CV</a>
+    <a href={`/cv/Francisco_Ucles_Ayllón_CV_${lang}.pdf`} target="_blank" rel="noopener">CV</a>
     <a href={altPath} class="lang-switch" aria-label="Cambiar idioma / Switch language">{t.langSwitch}</a>
   </nav>
 </header>

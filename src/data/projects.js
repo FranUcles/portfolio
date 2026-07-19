@@ -221,7 +221,7 @@ export const projects = [
             },
             {
               type: 'p',
-              text: 'Por último, quiero hacer mención a cómo el daemon y el CLI manejan la conexión al contenedor. Este precisa de comunicación previa del fcontainersd hacia el fcontainers-shim, a través del socjet, para indicarle el tipo de conexión (attatch o exec) que quiere el cliente. Posteriormente, se le envía al CLI el socket en el que el shim estará manejando la solicitud realizada.'
+              text: 'Por último, quiero hacer mención a cómo el daemon y el CLI manejan la conexión al contenedor. Este precisa de comunicación previa del fcontainersd hacia el fcontainers-shim, a través del socket, para indicarle el tipo de conexión (attatch o exec) que quiere el cliente. Posteriormente, se le envía al CLI el socket en el que el shim estará manejando la solicitud realizada.'
             },
             {
               type: 'image',
@@ -353,7 +353,7 @@ export const projects = [
     thumb: 2,
     year: '2025/2026',
     category: 'academic',
-    tags: ['VirtualBox', 'Cyberpanel', 'Greenbone', 'Dovecot', 'Postfix', 'Apache', 'BindDNS', 'MariaDB', 'OpenLDAP', 'OpenVPN', 'nmap', 'Nagios', 'Ntop', 'K8s', 'Snort', 'Overleaf'],
+    tags: ['VirtualBox', 'Cyberpanel', 'Greenbone', 'Dovecot', 'Postfix', 'Apache', 'PowerDNS', 'MariaDB', 'OpenLDAP', 'OpenVPN', 'nmap', 'Nagios', 'Ntop', 'K8s', 'Snort',],
     links: {
       repo: '',
       docs: '/proyectos/doraemon/Proyecto_Doraemon.pdf',
@@ -369,75 +369,165 @@ export const projects = [
       stackShort: 'VirtualBox · Docker · K8s',
       architecture: {
         intro: [
-          { type: 'p', text: 'Contexto general del sistema...' },
+          { type: 'p', text: 'Este proyecto forma parte de la evaluación final de dos asignaturas de la mención de computadores de la carrera de informática. A pesar de ser un proyecto puramente académico, considero que resulta interesante que aparezca en este portfolio por el valor que me aportó aprender todas estas herramientas en mi formación.' },
+          { type: 'p', text: 'El proyecto consiste en diseñar y desplegar una topología de red y de servicios relativos a dos empresas ficticias. Aunque el despliegue fuese virtualizado utilizando VirtualBox, debía ser reproducible en un entorno real con dispositivos físicos. Muchos de los servicios desplegados eran requisito para aprobar la práctica; sin embargo, también existen servicios y configuraciones extra que añadí con el objetivo de aprender nuevas tecnologías y mejorar los servicios prestados.'},
+          { type: 'p', text: 'A continuación, voy a pasar a hacer un repaso de los diferentes servicios de los que dispone este proyecto. Como son muchos servicios y dar una explicación detallada extendería esto innecesariamente, voy a dar detalles generales de cada grupo de servicios detallando su motivación y cuestiones que me parezcan interesantes. Para una especificación completo se puede cosultar la documentación.'}
         ],
         diagram: {
-          cover: { type: 'image', src: '/proyectos/sistema/diagrama-red.png', fit: 'contain' },
-          title: 'Diagrama general de la red',
+          cover: { type: 'image', src: '/proyectos/doraemon/topologia_completa.png'},
+          title: 'Diagrama general de la red y sus servicios',
         }
       },
       services: [
         {
-          title: 'API Gateway',
-          tagline: 'Punto de entrada único',
+          title: 'Ntop/nProbe y Nagios',
+          tagline: 'Monitorización de la red',
           overviews: [
-            { type: 'p', text: 'Explico el gateway...' },
-            { type: 'image', media: { type: 'image', src: '/proyectos/sistema/gateway.png' }, label: 'Panel del gateway' },
-            { type: 'p', text: 'Sigo explicando tras la imagen...' },
+            { type: 'p', text: 'Para empezar, me gustaría hablar de aquellos servicios que tienen como objetivo monitorizar la red. El objetivo de hacer un monitoreo de red es asegurar que todos los servicios se encuentran disponibles y controlar cómo se está comportando la misma. Para estas tareas se han usado Nagios y Ntop con nProbe, respectivamente.' },
+            { type: 'p', text: 'Nagios es un servicio que se despliega en la red interna de la organización y que tiene como objetivo verificar que todos los servicios están levantados y disponibles. Para ello, se configura qué servicios existen y en qué direcciones se encuentran. De esta manera, Nagios puede comprobar su estado e incluso enviar alertas ante posibles caídas. Este tipo de servicios es de vital importancia en una organización, pero más aún en una de este estilo que va a tener servicios públicos. Configurado adecuadamente te permite llevar un control exhaustivo de cómo se encuentran los servicios de forma centralizada.'},
+            { type: 'image', media: { type: 'image', src: '/proyectos/doraemon/nagios.png' }, label: 'Panel de control de Nagios'},
+            { type: 'p', text: 'Ntop es una herramienta que permite analizar el tráfico entrante por las interfaces de un dispositivo. Esta es perfecta para hacer un análisis del uso de la red y detectar saturaciones, usos inadecuados o incluso comportamientos sospechosos que indiquen un posible ataque. No obstante, Ntop solo analiza las trazas que atraviesan el dispositivo donde está instalado. Por lo tanto, para analizar toda la red, habría que instalar Ntop en un router o incluso hacer que todo el tráfico fluyera a través de Ntop. Aunque se podrían llevar a cabo estas opciones, preferí un enfoque más distribuido con nProbe.'},
+            { type: 'p', text: 'nProbe es otra herramienta creada por la misma empresa de Ntop que se tiene la labor de recopilar datos de la red y enviarlos a un servidor de Ntop. De esta manera, podemos monitorizar toda la red instalando esto dentro del router. Esta opción me pareció la más acertada porque permite gestionar toda la red sin instalar un servicio pesado en el Ntop completo. Además, tiene la ventaja de que si tenemos más de una sede, podemos centralizar el panel de Ntop y hacer que los datos de todas las sedes confluyan hacia un mismo servidor de Ntop.'},
+            { type: 'image', media: { type: 'image', src: '/proyectos/doraemon/ntop.png' }, label: 'Panel de control de Ntop'},
           ],
         },
         {
-          title: 'API Gateway',
-          tagline: 'Punto de entrada único',
+          title: 'DHCP y PowerDNS',
+          tagline: 'Gestión de la red privada y pública',
           overviews: [
-            { type: 'p', text: 'Explico el gateway...' },
-            { type: 'image', media: { type: 'image', src: '/proyectos/sistema/gateway.png' }, label: 'Panel del gateway' },
-            { type: 'p', text: 'Sigo explicando tras la imagen...' },
+            { type: 'p', text: 'Ahora voy a pasar a explicar una parte esencial de la red: DHCP y DNS. Ambos son servicios imprescindibles para una red, pero el más interesante y complejo de los dos es el DNS.' },
+            { type: 'p', text: 'La idea de tener un servidor DNS es permitir que los usuarios de los servicios puedan utilizar nombres de dominio y no tener que recordar las IPs de los dispositivos. Además, como la empresa provee servicios públicos es interesante tener un servidor DNS público para estos servicios. Ambos servicios han sido gestionados con PowerDNS, con la diferencia de que el DNS público se encuentra manejado por Cyberpanel. Lo que sí es importante destacar es que ambos hacen uso de una base de datos para almacenar los registros DNS.'},
+            { type: 'p', text: 'Como única cuestión interesante a destacar, quiero analizar la necesidad de tener un DNS público self-hosted. En esta caso, se llevo a cabo el despliegue de un DNS público con Cyberpanel ya que el proyecto así lo exigía. Esto tiene la ventaja de aportarte control total sobre el servidor DNS y su monitoreo. No obstante, en la gran mayoría de ocasiones, conviene hacer uso de servicios como Cloudflare. Estos no solo te ofrecen la gestión de un servidor DNS con casi el 100% de uptime, sino que además poseen protecciones contra ataques DDoS y otras cuestiones de seguridad sin tener que complicar la infraestructura. Por eso mismo, muchas veces convendrá más contratar este tipo de servicios para el DNS público y desplegar uno más sencillo para el privado.'}
           ],
         },
-        // más servicios...
+        {
+          title: 'OpenVPN y OpenLDAP',
+          tagline: 'Control de acceso',
+          overviews: [
+            { type: 'p', text: 'Primeramente, me gustaría comentar el valor que aporta un directorio LDAP en una empresa. Un directorio LDAP permite a la empresa centralizar la información de todos los empleados y gestionar la autorización de los mismos. Esto es lo que permite que un cliente de correo autocomplete los datos de una dirección solo aportando el nombre; también permite que se compruebe si ciertos empleados tienen o no acceso a ciertos datos o servicios; entre otros. Por eso mismo, decidí desplegar este servicio con OpenLDAP ya que será de gran utilidad.'},
+            { type: 'p', text: 'Poder permitir el acceso remoto de trabajadores que no pueden acudir a la oficina es primordial en muchas empresas. Para ello, es necesario un canal de comuniación que permita acceder remotamente a un dispositivo de forma segura. Ahí es donde entra en juego OpenVPN. Esta es una herramienta que permite crear un túnel para conectar dos dispositivos de forma segura. Para ello, solo es necesario una clave de confianza y conocida por el servidor de OpenVPN. Se elegió esta herramienta y no otras muy populares como Wireguard ya que OpenVPN permite simular que el dispositivo remoto se encuentra físicamente en la misma red. Una desventaja que posee OpenVPN es que, con un certificado válido, cualquier persona podría conectarse a la VPN. Aquí entra el directorio LDAP.' },
+            { type: 'p', text: 'La idea es sencilla: solo los usuario autorizados pueden conectarse a la VPN. De esta manera, OpenVPN cuando recibe una solicitud de conexión con certificado válido, comprobará que este usuario tenga la autorización adecuada preguntando al directorio LDAP. Así, solo los usuarios con permiso verán la petición de acceso a la VPN aceptada.'},
+          ],
+        },
+        {
+          title: 'Cyberpanel',
+          tagline: 'Despliegue centralizado de servicios públicos',
+          overviews: [
+            { type: 'p', text: 'Esta sección es sencilla y es que para el despliegue de los servicios públicos se ha utilizado la herramienta llamada Cyberpanel. Esta herramienta permite la gestión y el despliegue de servidores web, SMTP, IMAP, POP3, FTP y muchos otros de forma sencilla y centralizada. Es cierto que todos estos servicios podría montarse con sus herramientas correspondientes de forma separada (Apache, Dovecot, Postfix, FTPd...), pero Cyberpanel aporta una gestión sencilla y centralizada de los mismos con poco esfuerzo.'},
+            { type: 'p', text: 'Una cosa que sí merece especial mención es el desacople de la base de datos. Cyberpanel hace uso de una base de datos para almacenar toda la información y esta se instala en el mismo dispositivo. Esto implica que habría una base de datos en una DMZ y eso considero que es un posible vector de ataque. Por eso mismo, decidí desacoplar la base de datos e indicarle a Cyberpanel que debía usar otra base de datos en otra ubicación y que usaría la de MariaDB en la red privada.'},
+            { type: 'image', media: { type: 'image', src: '/proyectos/doraemon/cyberpanel.png' }, label: 'Panel de control de Cyberpanel'},
+          ],
+        },
+        {
+          title: 'Firewall, nmap, Snort y Greenbone',
+          tagline: 'Auditoría y análisis de seguridad',
+          overviews: [
+            { type: 'p', text: 'Otro aspecto muy importante a la hora de crear y administrar un sistema es la seguridad. Es necesario implementar mecanismos defensivos para proteger la infraestructura y los servicios de posibles atacantes; pero también es imprescindible diseñar un plan de auditoría de seguridad para verificar las posibles fallas.' },
+            { type: 'p', text: 'En cuanto a lo primero, los principales métodos defensivos fueron una buena configuración de Firewall y el despliegue de Snort para la detección de intrusos. Una adecuada configuración de Firewall es vital para la seguridad de un sistema y aquí realicé un análisis profundo de cada dispositivo para determinar qué reglas son las mínimas necesarias para su funcionamiento. Además, hice distinción entre reglas stateless y stateful para un protección más eficaz. El despliegue de Snort en el router me pareció una robusta medida de alerta ya que dispone de grandes reglas creadas por la comunidad que recogen patrones de ataque e intrusión muy conocidos.'},
+            { type: 'p', text: 'Por otro lado, en la faceta ofensiva, realicé una auditoria de seguridad mediante nmap y, sobre todo, Greenbone/OpenVAS. Esta última herramienta es muy utilizada ya que permite hacer análisis tanto perimetrales como autorizados de diferentes dispositivos, generar alertas, generar informes, programar análisis y muchas cosas más. En este proyecto solo se llevó a cabo un análisis perimetral y autorizado de los servidores debido a la falta de tiempo y experiencia. No obstante, esta herramienta habría permitido un crear un plan de auditoría mucho más robusto. '}
+          ],
+        },
+        {
+          title: 'Kubernetes (K8s)',
+          tagline: 'Despliegue de servicios con redundancia',
+          overviews: [
+            { type: 'p', text: 'Finalmente, también se desplegó un clúster de Kubernetes. Este despliegue era parte del proyecto por lo que el caso de uso no es lo más relevante. La práctica solo requería una simulación de un clúster usando minikube, pero yo decidí utilizar una instalación completa con kubeadm para ser más realista. De esta manera, podría aportar el valor real de un clúster de K8s. Además, también incluí el despliegue del dashboard de K8s para gestionar más cómodamente todo el clúster.' },
+            {
+              type: 'callout',
+              text: 'Durante el desarrollo del proyecto escribí una guía completa para poder desplegar diferentes tipos de clústeres de Kubernetes.',
+              link: { href: 'https://app.notion.com/p/Montar-cl-ster-K8s-2aa84cb7139280308f07f4877fc9a1e5', label: 'Ver guía en Notion' },
+            },
+            { type: 'p', text: 'Como aspecto a destacar, quiero mencionar que como el servicio desplegado en K8s fue un servidor Nginx privado para la empresa había una necesidad de compartir almacenamiento entre replicas. De lo contrario, según qué pod respondiera se serviría una página distinta y el despliegue de nuevas versiones de la web sería más complicado. Por eso mismo, se creo PV y un PVC que permitía la conexión a un NFS que contendría el contenido del servidor web. Asimismo, para asegurar una configuración uniforme de todas las réplicas se recurrió a un ConfigMap para la configuración de Nginx.'},
+            { type: 'image', media: { type: 'image', src: '/proyectos/doraemon/k8s.png' }, label: 'Panel de control de K8s'},
+          ],
+        },
       ],
     },
     en: {
-      eyebrow: 'Net and services system · Academic project',
+      eyebrow: 'Network and services system · Academic project',
       title: 'Doraemon',
       tagline:
         'Design and implementation of a network topology and associated services for two fictitious companies in a virtualized environment.',
       summary:
         'Design and implementation of a network topology and associated services for two fictitious companies in a virtualized environment.',
-      role: 'Design & deploy',
-      stackShort: 'VirtualBox',
+      role: 'Design and deployment',
+      stackShort: 'VirtualBox · Docker · K8s',
       architecture: {
         intro: [
-          { type: 'p', text: 'Contexto general del sistema...' },
+          { type: 'p', text: 'This project is part of the final assessment for two courses in the computer engineering specialization of my degree. Even though it is a purely academic project, I felt it was worth including in this portfolio given the value I got out of learning all these tools during my studies.' },
+          { type: 'p', text: 'The project consists of designing and deploying a network topology and the services related to two fictitious companies. Although the deployment was virtualized using VirtualBox, it had to be reproducible in a real environment with physical devices. Many of the deployed services were required in order to pass the assignment; however, there are also extra services and configurations that I added with the aim of learning new technologies and improving the services provided.'},
+          { type: 'p', text: 'Below, I will go through the different services included in this project. Since there are many services and a detailed explanation would make this unnecessarily long, I will give a general overview of each group of services, describing their motivation and any points I find interesting. For a full specification, the documentation can be consulted.'}
         ],
         diagram: {
-          cover: { type: 'image', src: '/proyectos/sistema/diagrama-red.png', fit: 'contain' },
-          title: 'Diagrama general de la red',
+          cover: { type: 'image', src: '/proyectos/doraemon/topologia_completa.png'},
+          title: 'General diagram of the network and its services',
         }
       },
       services: [
         {
-          title: 'API Gateway',
-          tagline: 'Punto de entrada único',
+          title: 'Ntop/nProbe and Nagios',
+          tagline: 'Network monitoring',
           overviews: [
-            { type: 'p', text: 'Explico el gateway...' },
-            { type: 'image', media: { type: 'image', src: '/proyectos/sistema/gateway.png' }, label: 'Panel del gateway' },
-            { type: 'p', text: 'Sigo explicando tras la imagen...' },
+            { type: 'p', text: 'To begin with, I would like to talk about the services aimed at monitoring the network. The goal of network monitoring is to ensure that all services are available and to keep track of how the network is behaving. Nagios and Ntop with nProbe were used for these tasks, respectively.' },
+            { type: 'p', text: 'Nagios is a service deployed within the organization\'s internal network with the goal of verifying that all services are up and available. To do this, it is configured with which services exist and at which addresses they can be found. This way, Nagios can check their status and even send alerts when something goes down. This kind of service is vital for any organization, but even more so for one like this that will have public-facing services. Properly configured, it lets you keep thorough, centralized track of the state of your services.'},
+            { type: 'image', media: { type: 'image', src: '/proyectos/doraemon/nagios.png' }, label: 'Nagios control panel'},
+            { type: 'p', text: 'Ntop is a tool that analyzes incoming traffic through a device\'s interfaces. It is perfect for analyzing network usage and detecting congestion, inappropriate use, or even suspicious behavior indicating a possible attack. However, Ntop only analyzes the traces that pass through the device where it is installed. Therefore, to analyze the entire network, Ntop would need to be installed on a router, or all traffic would need to be routed through it. Although these options were feasible, I preferred a more distributed approach using nProbe.'},
+            { type: 'p', text: 'nProbe is another tool made by the same company behind Ntop, and its job is to collect network data and send it to an Ntop server. This way, we can monitor the entire network by installing it inside the router. I felt this was the best option because it allows managing the whole network without installing a heavy service on the full Ntop instance. It also has the advantage that, if there is more than one site, the Ntop dashboard can be centralized so that data from all sites flows into the same Ntop server.'},
+            { type: 'image', media: { type: 'image', src: '/proyectos/doraemon/ntop.png' }, label: 'Ntop control panel'},
           ],
         },
         {
-          title: 'API Gateway',
-          tagline: 'Punto de entrada único',
+          title: 'DHCP and PowerDNS',
+          tagline: 'Private and public network management',
           overviews: [
-            { type: 'p', text: 'Explico el gateway...' },
-            { type: 'image', media: { type: 'image', src: '/proyectos/sistema/gateway.png' }, label: 'Panel del gateway' },
-            { type: 'p', text: 'Sigo explicando tras la imagen...' },
+            { type: 'p', text: 'Now I will explain an essential part of the network: DHCP and DNS. Both are essential services for a network, but the more interesting and complex of the two is DNS.' },
+            { type: 'p', text: 'The idea behind having a DNS server is to allow service users to use domain names instead of having to remember device IPs. In addition, since the company provides public services, it is worth having a public DNS server for them. Both services were managed with PowerDNS, with the difference that the public DNS is managed through Cyberpanel. What is important to highlight is that both make use of a database to store the DNS records.'},
+            { type: 'p', text: 'As the one interesting point worth analyzing, I want to look at the need for a self-hosted public DNS. In this case, a public DNS was deployed with Cyberpanel because the project required it. This has the advantage of giving you full control over the DNS server and its monitoring. However, in the vast majority of cases, it is better to use services like Cloudflare. These not only offer DNS server management with close to 100% uptime, but also provide protection against DDoS attacks and other security concerns without having to complicate the infrastructure. For this reason, it is often better to contract this kind of service for public DNS and deploy a simpler one for the private network.'}
           ],
         },
-        // más servicios...
+        {
+          title: 'OpenVPN and OpenLDAP',
+          tagline: 'Access control',
+          overviews: [
+            { type: 'p', text: 'First, I would like to talk about the value an LDAP directory brings to a company. An LDAP directory allows a company to centralize the information of all employees and manage their authorization. This is what lets an email client autocomplete an address just from a name; it also allows checking whether certain employees have access to certain data or services, among other things. For this reason, I decided to deploy this service using OpenLDAP, since it would be very useful.'},
+            { type: 'p', text: 'Being able to allow remote access for employees who cannot come into the office is essential for many companies. This requires a communication channel that allows secure remote access to a device. That is where OpenVPN comes in. This is a tool that allows a tunnel to be created to securely connect two devices. All that is needed is a trusted key known to the OpenVPN server. This tool was chosen over other very popular ones like Wireguard because OpenVPN makes it possible to simulate the remote device being physically on the same network. One drawback of OpenVPN is that, with a valid certificate, anyone could connect to the VPN. This is where the LDAP directory comes in.' },
+            { type: 'p', text: 'The idea is simple: only authorized users can connect to the VPN. This way, when OpenVPN receives a connection request with a valid certificate, it checks whether that user has the appropriate authorization by querying the LDAP directory. That way, only users with permission will have their VPN access request accepted.'},
+          ],
+        },
+        {
+          title: 'Cyberpanel',
+          tagline: 'Centralized deployment of public services',
+          overviews: [
+            { type: 'p', text: 'This section is simple: a tool called Cyberpanel was used to deploy the public services. This tool allows the management and deployment of web, SMTP, IMAP, POP3, FTP servers, and many others in a simple, centralized way. It is true that all of these services could be set up separately with their corresponding tools (Apache, Dovecot, Postfix, FTPd...), but Cyberpanel provides simple, centralized management of them with little effort.'},
+            { type: 'p', text: 'One thing that does deserve special mention is decoupling the database. Cyberpanel uses a database to store all its information, and by default it is installed on the same device. This would mean having a database inside a DMZ, which I consider a potential attack vector. For this reason, I decided to decouple the database and configure Cyberpanel to use a different database in another location, using the MariaDB instance on the private network.'},
+            { type: 'image', media: { type: 'image', src: '/proyectos/doraemon/cyberpanel.png' }, label: 'Cyberpanel control panel'},
+          ],
+        },
+        {
+          title: 'Firewall, nmap, Snort, and Greenbone',
+          tagline: 'Security auditing and analysis',
+          overviews: [
+            { type: 'p', text: 'Another very important aspect when building and administering a system is security. It is necessary to implement defensive mechanisms to protect the infrastructure and services from possible attackers, but it is also essential to design a security auditing plan to check for possible flaws.' },
+            { type: 'p', text: 'Regarding the first point, the main defensive methods were a well-configured firewall and the deployment of Snort for intrusion detection. Proper firewall configuration is vital to a system\'s security, and here I carried out an in-depth analysis of each device to determine the minimum rules necessary for it to work. I also distinguished between stateless and stateful rules for more effective protection. Deploying Snort on the router seemed like a solid alert mechanism, since it comes with extensive community-created rule sets that capture well-known attack and intrusion patterns.'},
+            { type: 'p', text: 'On the offensive side, I carried out a security audit using nmap and, above all, Greenbone/OpenVAS. The latter tool is widely used since it allows both perimeter and authorized analysis of different devices, generating alerts, generating reports, scheduling scans, and much more. In this project, only a perimeter and authorized analysis of the servers was carried out, due to lack of time and experience. Even so, this tool would have allowed for a much more robust audit plan to be built.'}
+          ],
+        },
+        {
+          title: 'Kubernetes (K8s)',
+          tagline: 'Deploying services with redundancy',
+          overviews: [
+            { type: 'p', text: 'Finally, a Kubernetes cluster was also deployed. This deployment was part of the project, so the use case itself is not the most relevant part. The assignment only required a simulated cluster using minikube, but I decided to use a full installation with kubeadm to make it more realistic. This way, I could bring out the real value of a K8s cluster. I also included the deployment of the K8s dashboard to manage the whole cluster more conveniently.' },
+            {
+              type: 'callout',
+              text: 'While working on this project, I wrote a complete guide on how to deploy different types of Kubernetes clusters.',
+              link: { href: 'https://app.notion.com/p/Montar-cl-ster-K8s-2aa84cb7139280308f07f4877fc9a1e5', label: 'View guide on Notion' },
+            },
+            { type: 'p', text: 'One point worth highlighting is that, since the service deployed on K8s was a private Nginx server for the company, there was a need to share storage between replicas. Otherwise, depending on which pod responded, a different page would be served, and deploying new versions of the website would become more complicated. For this reason, a PV and a PVC were created to allow a connection to an NFS holding the web server\'s content. Likewise, to ensure a uniform configuration across all replicas, a ConfigMap was used for the Nginx configuration.'},
+            { type: 'image', media: { type: 'image', src: '/proyectos/doraemon/k8s.png' }, label: 'K8s control panel'},
+          ],
+        },
       ],
-    },
+    }
   },
   {
     slug: 'homelab',
